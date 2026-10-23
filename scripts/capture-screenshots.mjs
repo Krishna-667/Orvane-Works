@@ -12,10 +12,12 @@ async function capture() {
   const context = await browser.newContext();
 
   const routes = [
-    { namePrefix: "phase2-login", url: "http://localhost:3000/login" },
-    { namePrefix: "phase2-join", url: "http://localhost:3000/join" },
-    { namePrefix: "phase2-awaiting-approval", url: "http://localhost:3000/awaiting-approval" },
-    { namePrefix: "phase2-dashboard", url: "http://localhost:3000/dashboard" },
+    { namePrefix: "phase3-services", url: "http://localhost:3000/services" },
+    { namePrefix: "phase3-packages", url: "http://localhost:3000/packages" },
+    { namePrefix: "phase3-portfolio", url: "http://localhost:3000/portfolio" },
+    { namePrefix: "phase3-contact", url: "http://localhost:3000/contact" },
+    { namePrefix: "phase3-hardware", url: "http://localhost:3000/hardware" },
+    { namePrefix: "phase3-how-we-work", url: "http://localhost:3000/how-we-work" },
   ];
 
   const viewports = [
@@ -39,7 +41,7 @@ async function capture() {
   }
 
   await browser.close();
-  console.log("All Phase 2 screenshots captured successfully.");
+  console.log("All Phase 3 screenshots captured successfully.");
 }
 
 capture().catch((err) => {
