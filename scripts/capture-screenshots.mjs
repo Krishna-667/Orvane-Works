@@ -11,26 +11,35 @@ async function capture() {
   const browser = await chromium.launch();
   const context = await browser.newContext();
 
-  const viewports = [
-    { name: "phase1-360px.png", width: 360, height: 800 },
-    { name: "phase1-768px.png", width: 768, height: 1024 },
-    { name: "phase1-1280px.png", width: 1280, height: 800 },
+  const routes = [
+    { namePrefix: "phase2-login", url: "http://localhost:3000/login" },
+    { namePrefix: "phase2-join", url: "http://localhost:3000/join" },
+    { namePrefix: "phase2-awaiting-approval", url: "http://localhost:3000/awaiting-approval" },
+    { namePrefix: "phase2-dashboard", url: "http://localhost:3000/dashboard" },
   ];
 
-  for (const vp of viewports) {
-    const page = await context.newPage();
-    await page.setViewportSize({ width: vp.width, height: vp.height });
-    await page.goto("http://localhost:3000", { waitUntil: "load", timeout: 15000 });
-    // Brief pause for client hydration and font rendering
-    await page.waitForTimeout(500);
-    const targetPath = path.join(outDir, vp.name);
-    await page.screenshot({ path: targetPath, fullPage: true });
-    console.log(`Saved screenshot: ${targetPath}`);
-    await page.close();
+  const viewports = [
+    { name: "360px.png", width: 360, height: 800 },
+    { name: "768px.png", width: 768, height: 1024 },
+    { name: "1280px.png", width: 1280, height: 800 },
+  ];
+
+  for (const route of routes) {
+    for (const vp of viewports) {
+      const page = await context.newPage();
+      await page.setViewportSize({ width: vp.width, height: vp.height });
+      await page.goto(route.url, { waitUntil: "load", timeout: 15000 });
+      await page.waitForTimeout(400);
+      const filename = `${route.namePrefix}-${vp.name}`;
+      const targetPath = path.join(outDir, filename);
+      await page.screenshot({ path: targetPath, fullPage: true });
+      console.log(`Saved screenshot: ${targetPath}`);
+      await page.close();
+    }
   }
 
   await browser.close();
-  console.log("All screenshots captured successfully.");
+  console.log("All Phase 2 screenshots captured successfully.");
 }
 
 capture().catch((err) => {
