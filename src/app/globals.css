@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 38 29% 95%;       /* #F6F3EE Studio Cream */
+    --foreground: 220 12% 7%;        /* #111214 Deep Ink */
+
+    --card: 0 0% 100%;               /* #FFFFFF Card */
+    --card-foreground: 220 12% 7%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 12% 7%;
+
+    --primary: 9 76% 44%;            /* #C8341B Vermilion */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 40 18% 92%;         /* #EFECE6 */
+    --secondary-foreground: 220 12% 7%;
+
+    --muted: 40 18% 92%;
+    --muted-foreground: 222 5% 36%;  /* #575A60 Charcoal Muted */
+
+    --accent: 12 75% 96%;            /* #FDF1EE Soft vermilion tint */
+    --accent-foreground: 9 76% 44%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 37 20% 87%;            /* #E5E0D8 Sand Border */
+    --input: 37 20% 87%;
+    --ring: 9 76% 44%;
+
+    --radius: 0.625rem;
+
+    /* Custom tokens for quick retheming */
+    --font-size-body: 1.0625rem;     /* 17px */
+    --line-height-body: 1.6;
+    --max-reading-width: 68ch;
+  }
+
+  .dark {
+    --background: 220 7% 8%;         /* #121315 Dark Ink */
+    --foreground: 210 20% 96%;       /* #F3F4F6 Crisp Off-White */
+
+    --card: 216 9% 11%;              /* #1A1C1F Elevated */
+    --card-foreground: 210 20% 96%;
+
+    --popover: 216 9% 11%;
+    --popover-foreground: 210 20% 96%;
+
+    --primary: 9 100% 59%;           /* #FF4D30 High-Contrast Vermilion */
+    --primary-foreground: 220 12% 7%;
+
+    --secondary: 218 10% 15%;        /* #22252A */
+    --secondary-foreground: 210 20% 96%;
+
+    --muted: 218 10% 15%;
+    --muted-foreground: 218 11% 65%; /* #9CA3AF */
+
+    --accent: 11 38% 13%;            /* #2C1814 */
+    --accent-foreground: 9 100% 71%;
+
+    --destructive: 0 63% 31%;
+    --destructive-foreground: 210 20% 96%;
+
+    --border: 218 12% 19%;           /* #2B2F36 */
+    --input: 218 12% 19%;
+    --ring: 9 100% 59%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-size: var(--font-size-body);
+    line-height: var(--line-height-body);
+  }
+
+  /* Accessible focus states */
+  :focus-visible {
+    @apply outline-none ring-2 ring-primary ring-offset-2 ring-offset-background;
+  }
+
+  /* Text selection highlight */
+  ::selection {
+    @apply bg-primary/20 text-foreground;
+  }
+
+  /* Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}

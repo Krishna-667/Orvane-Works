@@ -1,0 +1,128 @@
+export const en = {
+  common: {
+    brandName: "Orvane",
+    tagline: "Student-founded freelance studio in Madurai",
+    startProject: "Start a project",
+    viewWork: "Explore our work",
+    contactUs: "Contact us",
+    mailUs: "Mail us directly",
+    callUs: "Call us",
+    chatOnWhatsApp: "Chat on WhatsApp",
+    joinTheTeam: "Join our team",
+    login: "Log in",
+    clientLogin: "Client Portal",
+    signup: "Sign up",
+    logout: "Log out",
+    dashboard: "Dashboard",
+    allRightsReserved: "All rights reserved.",
+    dpdpNotice: "Privacy first: compliant with India's Digital Personal Data Protection (DPDP) Act.",
+    comingSoon: "Coming soon",
+    currencySymbol: "₹",
+    loading: "Loading...",
+    error: "Something went wrong",
+    tryAgain: "Try again",
+  },
+  nav: {
+    services: "Services",
+    packages: "Packages",
+    portfolio: "Portfolio",
+    team: "Team",
+    howWeWork: "How we work",
+    about: "About",
+    testimonials: "Testimonials",
+    faq: "FAQ",
+    contact: "Contact",
+    hardware: "Hardware (IoT)",
+  },
+  hero: {
+    eyebrow: "Engineering Students. Professional Precision.",
+    headline: "We build websites, edit videos, and craft content that grow your business.",
+    subheadline:
+      "A freelance studio founded by engineering students in Madurai. Clean code, sharp edits, and honest communication for local leaders and remote visionaries.",
+    ctaPrimary: "Start your project",
+    ctaSecondary: "Browse our work",
+    trustBadge: "Based in Madurai • Serving Tamil Nadu & Global Clients",
+  },
+  services: {
+    title: "What We Do",
+    subtitle: "End-to-end digital craft tailored to your goals. Expandable and fully modular.",
+    webDev: {
+      title: "Web Design & Development",
+      description: "High-performance, accessible, and responsive web applications and landing pages built to convert.",
+    },
+    videoEditing: {
+      title: "Video Editing",
+      description: "Story-driven short-form reels, brand commercials, and YouTube content with tight pacing and custom motion.",
+    },
+    contentCreation: {
+      title: "Content Creation",
+      description: "Strategic social media carousels, visual identities, and brand assets designed for high engagement.",
+    },
+    hardwareWaitlist: {
+      title: "Hardware & IoT",
+      badge: "Coming soon",
+      description: "Custom firmware, connected sensors, and prototype automation. Join the priority waitlist.",
+    },
+  },
+  process: {
+    title: "How We Work",
+    subtitle: "A clear, transparent four-step workflow from idea to launch.",
+    steps: [
+      {
+        step: "01",
+        title: "Discover & Quote",
+        desc: "You submit your brief; we review within 24 hours with an itemized, clear quote in INR (₹).",
+      },
+      {
+        step: "02",
+        title: "Design & Build",
+        desc: "We build iteratively in public, sharing clickable staging links and preview reels for your feedback.",
+      },
+      {
+        step: "03",
+        title: "Refine & Polish",
+        desc: "Direct communication with assigned student specialists. Fast revisions and zero corporate delays.",
+      },
+      {
+        step: "04",
+        title: "Deliver & Support",
+        desc: "Complete asset handoff, production deployment, and post-launch check-ins.",
+      },
+    ],
+  },
+  hardware: {
+    eyebrow: "R&D Initiative",
+    title: "Hardware & IoT Projects",
+    subtitle: "Embedded systems, smart telemetry, and custom automation built by engineering students.",
+    waitlistCta: "Join the Hardware Waitlist",
+  },
+  contact: {
+    title: "Let's Build Something Memorable",
+    subtitle: "Tell us about your project or drop by our Madurai studio hub. We reply within 24 hours.",
+    formName: "Your Name",
+    formEmail: "Email Address",
+    formPhone: "Phone (WhatsApp preferred)",
+    formService: "Service Needed",
+    formMessage: "Tell us about your project scope & deadline",
+    submit: "Send Message",
+    successMessage: "Thanks! We received your message and sent a confirmation email. We'll be in touch shortly.",
+  },
+  team: {
+    title: "Meet the Studio",
+    subtitle: "The engineering students and digital specialists driving Orvane.",
+    requestMember: "Request {name} for your project",
+    available: "Available for projects",
+    busy: "Partially booked",
+    unavailable: "Unavailable",
+  },
+  auth: {
+    loginTitle: "Welcome Back",
+    signupTitle: "Create Client Account",
+    joinTitle: "Apply to Join Orvane",
+    awaitingApprovalTitle: "Application Submitted",
+    awaitingApprovalMessage:
+      "Your team application has been received and is awaiting administrator review. You will receive an email as soon as an admin approves or updates your status.",
+  },
+};
+
+export type TranslationType = typeof en;
