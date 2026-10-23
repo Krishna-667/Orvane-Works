@@ -12,10 +12,15 @@ async function capture() {
   const context = await browser.newContext();
 
   const routes = [
-    { namePrefix: "phase5-dashboard", url: "http://localhost:3000/dashboard" },
-    { namePrefix: "phase5-new-order", url: "http://localhost:3000/dashboard/orders/new" },
-    { namePrefix: "phase5-order-detail", url: "http://localhost:3000/dashboard/orders/ORV-2026-0001" },
-    { namePrefix: "phase5-settings", url: "http://localhost:3000/dashboard/settings" },
+    { namePrefix: "phase6-employee-hub", url: "http://localhost:3000/employee" },
+    { namePrefix: "phase6-employee-order", url: "http://localhost:3000/employee/orders/ORV-2026-0001" },
+    { namePrefix: "phase6-admin-overview", url: "http://localhost:3000/admin" },
+    { namePrefix: "phase6-admin-employees", url: "http://localhost:3000/admin/employees" },
+    { namePrefix: "phase6-admin-orders", url: "http://localhost:3000/admin/orders" },
+    { namePrefix: "phase6-admin-order-detail", url: "http://localhost:3000/admin/orders/ORV-2026-0001" },
+    { namePrefix: "phase6-admin-inbox", url: "http://localhost:3000/admin/inbox" },
+    { namePrefix: "phase6-admin-content", url: "http://localhost:3000/admin/content" },
+    { namePrefix: "phase6-admin-audit", url: "http://localhost:3000/admin/audit" },
   ];
 
   const viewports = [
@@ -39,7 +44,7 @@ async function capture() {
   }
 
   await browser.close();
-  console.log("All Phase 5 screenshots captured successfully.");
+  console.log("All Phase 6 screenshots captured successfully.");
 }
 
 capture().catch((err) => {

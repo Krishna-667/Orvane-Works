@@ -1,11 +1,38 @@
 import Link from "next/link";
-import { UserCheck, CheckCircle2, Clock, Upload, ArrowUpRight } from "lucide-react";
+import {
+  UserCheck,
+  CheckCircle2,
+  Clock,
+  Upload,
+  ArrowUpRight,
+  FolderKanban,
+  Calendar,
+  MessageSquare,
+  AlertCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+} from "@/components/ui/card";
 import { StatusChip } from "@/components/ui/status-chip";
+import { getClientOrders } from "@/lib/data/orders";
+import { formatDate } from "@/lib/utils";
 
-export default function EmployeeDashboardPage() {
+export default async function EmployeeDashboardPage() {
+  const allOrders = await getClientOrders();
+  // Filter for orders relevant to the employee
+  const assignedOrders = allOrders.filter(
+    (o) => o.status !== "closed" && o.status !== "cancelled"
+  );
+  const upcomingDeadlines = assignedOrders.filter(
+    (o) => o.status === "in_progress" || o.status === "awaiting_feedback"
+  );
+
   return (
     <div className="container py-8 space-y-8">
       {/* Top Welcome Bar */}
@@ -18,16 +45,18 @@ export default function EmployeeDashboardPage() {
             <Badge variant="accent">Approved Specialist</Badge>
           </div>
           <p className="text-sm text-muted-foreground mt-1">
-            Manage assigned studio projects, upload client deliverables, and edit your public studio profile.
+            Manage assigned studio projects, advance deliverable milestones, and keep your public studio profile up-to-date.
           </p>
         </div>
 
-        <Link href="/employee/profile">
-          <Button variant="outline" className="gap-2">
-            <UserCheck className="w-4 h-4" />
-            Edit Public Profile
-          </Button>
-        </Link>
+        <div className="flex items-center gap-3">
+          <Link href="/employee/profile">
+            <Button variant="outline" size="sm" className="gap-2">
+              <UserCheck className="w-4 h-4" />
+              Public Profile Editor
+            </Button>
+          </Link>
+        </div>
       </div>
 
       {/* Metrics Grid */}
@@ -37,62 +66,121 @@ export default function EmployeeDashboardPage() {
             <CardDescription className="text-xs font-semibold uppercase tracking-wider">
               Assigned Orders
             </CardDescription>
-            <CardTitle className="text-3xl font-bold text-foreground">1</CardTitle>
+            <CardTitle className="text-3xl font-bold text-foreground">
+              {assignedOrders.length}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Active in your queue</p>
+            <p className="text-xs text-muted-foreground">Active engineering queue</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold uppercase tracking-wider">
-              Upcoming Deadlines
+              Active Milestones
             </CardDescription>
-            <CardTitle className="text-3xl font-bold text-foreground">1</CardTitle>
+            <CardTitle className="text-3xl font-bold text-vermilion">
+              {upcomingDeadlines.length}
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Due within 14 days</p>
+            <p className="text-xs text-muted-foreground">In progress &amp; awaiting feedback</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="pb-2">
             <CardDescription className="text-xs font-semibold uppercase tracking-wider">
-              Completed Deliverables
+              Unread Messages
             </CardDescription>
             <CardTitle className="text-3xl font-bold text-foreground">0</CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="text-xs text-muted-foreground">Approved by client</p>
+            <p className="text-xs text-muted-foreground">All client threads cleared</p>
           </CardContent>
         </Card>
       </div>
 
-      {/* My Assigned Orders */}
+      {/* My Assigned Orders Section */}
       <div className="space-y-4">
-        <h2 className="font-display text-xl font-bold text-foreground">Assigned Projects</h2>
+        <div className="flex items-center justify-between">
+          <h2 className="font-display text-xl font-bold text-foreground">
+            My Assigned Projects ({assignedOrders.length})
+          </h2>
+          <span className="text-xs text-muted-foreground">
+            Madurai Engineering Roster
+          </span>
+        </div>
 
-        <Card className="hover:border-primary/40 transition-colors">
-          <CardHeader className="pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-mono text-muted-foreground">ORV-2026-0001</span>
-                <StatusChip status="in_progress" />
-              </div>
-              <CardTitle className="text-lg">Starter Brand Website [Demo]</CardTitle>
-              <CardDescription className="text-xs">
-                Client: Meenakshi Sweets • Deadline: Nov 15, 2026
-              </CardDescription>
+        {assignedOrders.length === 0 ? (
+          <Card className="p-12 text-center space-y-4 border-dashed">
+            <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto text-muted-foreground">
+              <FolderKanban className="w-6 h-6" />
             </div>
-            <Link href="/employee/orders/ORV-2026-0001">
-              <Button size="sm" className="gap-1.5">
-                <Upload className="w-4 h-4" />
-                Upload Deliverables
-              </Button>
-            </Link>
-          </CardHeader>
-        </Card>
+            <div className="space-y-1 max-w-sm mx-auto">
+              <h3 className="font-display font-semibold text-foreground text-lg">
+                No orders currently assigned
+              </h3>
+              <p className="text-xs text-muted-foreground">
+                You will be assigned to new client projects as orders matching your specializations come in.
+              </p>
+            </div>
+          </Card>
+        ) : (
+          <div className="grid grid-cols-1 gap-4">
+            {assignedOrders.map((order) => (
+              <Card
+                key={order.id}
+                className="hover:border-primary/40 transition-colors shadow-sm overflow-hidden"
+              >
+                <CardHeader className="pb-3 flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                  <div className="space-y-1.5">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span className="text-xs font-mono font-semibold text-muted-foreground">
+                        {order.order_number}
+                      </span>
+                      <StatusChip status={order.status} />
+                      <Badge variant="outline" className="text-[10px]">
+                        {order.service_title}
+                      </Badge>
+                    </div>
+
+                    <CardTitle className="text-lg hover:text-vermilion transition-colors">
+                      <Link href={`/employee/orders/${order.order_number}`}>
+                        {order.title}
+                      </Link>
+                    </CardTitle>
+
+                    <CardDescription className="text-xs line-clamp-2 max-w-2xl">
+                      {order.project_brief}
+                    </CardDescription>
+                  </div>
+
+                  <Link href={`/employee/orders/${order.order_number}`}>
+                    <Button size="sm" className="gap-1.5 bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs">
+                      <Upload className="w-4 h-4" />
+                      Manage &amp; Upload
+                    </Button>
+                  </Link>
+                </CardHeader>
+
+                <CardContent className="pt-0 border-t border-border/60 bg-muted/10 py-3">
+                  <div className="flex flex-wrap items-center justify-between gap-4 text-xs text-muted-foreground">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5 text-muted-foreground" />
+                      Deadline: {formatDate(order.target_deadline)}
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <MessageSquare className="w-3.5 h-3.5 text-vermilion" />
+                      Contact via {order.preferred_contact_method}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

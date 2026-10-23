@@ -103,3 +103,97 @@ export async function updateEmployeeProfileAction(input: UpdateProfileInput) {
     return { success: false, error: "An unexpected error occurred." };
   }
 }
+
+/**
+ * Employee updates order status within permitted steps
+ */
+export async function updateEmployeeOrderProgressAction(
+  orderId: string,
+  orderNumber: string,
+  newStatus: "in_progress" | "awaiting_feedback" | "delivered",
+  notes?: string
+) {
+  const { profile } = await requireEmployee();
+  const supabase = createClient();
+
+  try {
+    const { data: order } = await supabase
+      .from("orders")
+      .select("status, client_profile:client_id(email, full_name)")
+      .eq("id", orderId)
+      .single();
+
+    await supabase
+      .from("orders")
+      .update({
+        status: newStatus,
+        updated_at: new Date().toISOString(),
+      })
+      .eq("id", orderId);
+
+    await supabase.from("order_events").insert({
+      order_id: orderId,
+      actor_id: profile.id,
+      event_type: "STATUS_CHANGE",
+      previous_value: order?.status,
+      new_value: newStatus,
+      notes: notes || "Progress updated by assigned team specialist.",
+    });
+
+    await logAuditEvent({
+      actorId: profile.id,
+      action: "EMPLOYEE_ORDER_PROGRESS_UPDATED",
+      entityType: "orders",
+      entityId: orderId,
+      metadata: { order_number: orderNumber, new_status: newStatus, notes },
+    });
+
+    revalidatePath(`/employee/orders/${orderNumber}`);
+    revalidatePath(`/dashboard/orders/${orderNumber}`);
+    return { success: true, message: "Project status updated." };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
+
+/**
+ * Employee uploads deliverable file
+ */
+export async function uploadEmployeeDeliverableAction(
+  orderId: string,
+  orderNumber: string,
+  fileName: string,
+  fileSize: number,
+  mimeType: string,
+  storagePath: string
+) {
+  const { profile } = await requireEmployee();
+  const supabase = createClient();
+
+  try {
+    await supabase.from("order_files").insert({
+      order_id: orderId,
+      uploader_id: profile.id,
+      file_name: fileName,
+      file_size: fileSize,
+      mime_type: mimeType,
+      storage_path: storagePath,
+      file_category: "deliverable",
+      is_deliverable: true,
+    });
+
+    await logAuditEvent({
+      actorId: profile.id,
+      action: "DELIVERABLE_UPLOADED",
+      entityType: "order_files",
+      entityId: orderId,
+      metadata: { order_number: orderNumber, file_name: fileName },
+    });
+
+    revalidatePath(`/employee/orders/${orderNumber}`);
+    revalidatePath(`/dashboard/orders/${orderNumber}`);
+    return { success: true, message: "Deliverable uploaded successfully!" };
+  } catch (err: any) {
+    return { success: false, error: err.message };
+  }
+}
