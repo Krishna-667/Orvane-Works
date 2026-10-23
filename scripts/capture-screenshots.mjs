@@ -20,7 +20,9 @@ async function capture() {
   for (const vp of viewports) {
     const page = await context.newPage();
     await page.setViewportSize({ width: vp.width, height: vp.height });
-    await page.goto("http://localhost:3000", { waitUntil: "networkidle" });
+    await page.goto("http://localhost:3000", { waitUntil: "load", timeout: 15000 });
+    // Brief pause for client hydration and font rendering
+    await page.waitForTimeout(500);
     const targetPath = path.join(outDir, vp.name);
     await page.screenshot({ path: targetPath, fullPage: true });
     console.log(`Saved screenshot: ${targetPath}`);
@@ -28,6 +30,7 @@ async function capture() {
   }
 
   await browser.close();
+  console.log("All screenshots captured successfully.");
 }
 
 capture().catch((err) => {
