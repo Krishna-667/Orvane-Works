@@ -1,4 +1,20 @@
 /** @type {import('next').NextConfig} */
+const cspHeader = `
+  default-src 'self';
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' https://challenges.cloudflare.com;
+  style-src 'self' 'unsafe-inline';
+  img-src 'self' blob: data: https://images.unsplash.com https://*.supabase.co;
+  font-src 'self' data:;
+  frame-src 'self' https://challenges.cloudflare.com;
+  connect-src 'self' https://*.supabase.co https://api.resend.com;
+  object-src 'none';
+  base-uri 'self';
+  form-action 'self';
+  frame-ancestors 'none';
+  block-all-mixed-content;
+  upgrade-insecure-requests;
+`.replace(/\s{2,}/g, ' ').trim();
+
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
@@ -21,6 +37,10 @@ const nextConfig = {
       {
         source: '/(.*)',
         headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: cspHeader,
+          },
           {
             key: 'X-Content-Type-Options',
             value: 'nosniff',
