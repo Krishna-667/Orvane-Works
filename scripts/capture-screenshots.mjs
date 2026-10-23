@@ -12,12 +12,9 @@ async function capture() {
   const context = await browser.newContext();
 
   const routes = [
-    { namePrefix: "phase3-services", url: "http://localhost:3000/services" },
-    { namePrefix: "phase3-packages", url: "http://localhost:3000/packages" },
-    { namePrefix: "phase3-portfolio", url: "http://localhost:3000/portfolio" },
-    { namePrefix: "phase3-contact", url: "http://localhost:3000/contact" },
-    { namePrefix: "phase3-hardware", url: "http://localhost:3000/hardware" },
-    { namePrefix: "phase3-how-we-work", url: "http://localhost:3000/how-we-work" },
+    { namePrefix: "phase4-team", url: "http://localhost:3000/team" },
+    { namePrefix: "phase4-profile", url: "http://localhost:3000/team/karthik-rajan" },
+    { namePrefix: "phase4-editor", url: "http://localhost:3000/employee/profile" },
   ];
 
   const viewports = [
@@ -30,8 +27,8 @@ async function capture() {
     for (const vp of viewports) {
       const page = await context.newPage();
       await page.setViewportSize({ width: vp.width, height: vp.height });
-      await page.goto(route.url, { waitUntil: "load", timeout: 15000 });
-      await page.waitForTimeout(400);
+      await page.goto(route.url, { waitUntil: "domcontentloaded", timeout: 20000 });
+      await page.waitForTimeout(600);
       const filename = `${route.namePrefix}-${vp.name}`;
       const targetPath = path.join(outDir, filename);
       await page.screenshot({ path: targetPath, fullPage: true });
@@ -41,7 +38,7 @@ async function capture() {
   }
 
   await browser.close();
-  console.log("All Phase 3 screenshots captured successfully.");
+  console.log("All Phase 4 screenshots captured successfully.");
 }
 
 capture().catch((err) => {
