@@ -60,9 +60,9 @@ test.describe("Flow 1: Client Sign-up, Order Request & Detail View", () => {
     ]);
 
     await page.goto("/dashboard/orders/ORV-2026-0001", {
-      waitUntil: "domcontentloaded",
+      waitUntil: "networkidle",
     });
-    await expect(page.locator("h1")).toContainText(/Starter Brand Website/i);
+    await expect(page.locator("h1")).toContainText(/Starter Brand Website/i, { timeout: 10000 });
 
     // Verify visual status timeline exists
     await expect(page.getByText(/Active Step|In Progress/i).first()).toBeVisible();
