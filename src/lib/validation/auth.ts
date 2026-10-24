@@ -50,7 +50,7 @@ export const joinTeamSchema = z.object({
     .min(1, "Please select or list at least one engineering or creative skill."),
   coverNote: z
     .string()
-    .min(30, "Please tell us briefly about your engineering background and why you want to join Orvane (at least 30 characters)."),
+    .min(30, "Please tell us briefly about your engineering background and why you want to join Orvane Works (at least 30 characters)."),
 });
 
 export type JoinTeamInput = z.infer<typeof joinTeamSchema>;

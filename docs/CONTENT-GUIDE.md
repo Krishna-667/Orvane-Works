@@ -150,7 +150,17 @@ Every order follows a strict visual milestone progression visible to the client 
    - Client is notified by email and prompted to review and approve the quote in their dashboard.
 3. **Internal Team Notes**:
    - Add yellow-badged internal notes on any order. These are **strictly confidential** and invisible to the client.
-4. **Deliverables Vault**:
+4. **Recording Manual Payments**:
+   - Open an order and scroll to the **Payments** panel below the governance workbench.
+   - Click **Record New Payment**.
+   - Fill in: Amount (₹), Date Received, Payment Type (Advance / Balance / Full), Method (UPI / Bank Transfer / Cash / Other), and optionally the UTR / transaction reference and an internal note.
+   - Click **Record Payment**. The system will:
+     - Save the payment to the `order_payments` table.
+     - Auto-recalculate the order's payment status (Invoiced → Advance Received → Partially Paid → Paid in Full).
+     - Send a payment confirmation email to the client.
+   - To **void** a payment (e.g. duplicate entry, refund): click **Void** next to the entry, enter a reason, and confirm. The payment is soft-deleted; the balance is recalculated automatically.
+   - **What the client sees**: Amount, type, and date — UTR references and internal notes are hidden.
+5. **Deliverables Vault**:
    - When milestones are ready, upload deliverables to Supabase private storage.
    - The system generates signed, time-limited download URLs for the client.
 5. **Advancing Milestones**:

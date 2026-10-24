@@ -53,7 +53,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:text-primary hover:border-primary transition-colors"
-                aria-label="Orvane Instagram"
+                aria-label="Orvane Works Instagram"
               >
                 <Instagram className="w-4 h-4" />
               </a>
@@ -62,7 +62,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:text-primary hover:border-primary transition-colors"
-                aria-label="Orvane LinkedIn"
+                aria-label="Orvane Works LinkedIn"
               >
                 <Linkedin className="w-4 h-4" />
               </a>
@@ -71,7 +71,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:text-primary hover:border-primary transition-colors"
-                aria-label="Orvane YouTube"
+                aria-label="Orvane Works YouTube"
               >
                 <Youtube className="w-4 h-4" />
               </a>
@@ -80,7 +80,7 @@ export function Footer() {
                 target="_blank"
                 rel="noreferrer"
                 className="w-9 h-9 rounded-full border border-border flex items-center justify-center hover:text-primary hover:border-primary transition-colors"
-                aria-label="Orvane GitHub"
+                aria-label="Orvane Works GitHub"
               >
                 <Github className="w-4 h-4" />
               </a>
@@ -147,7 +147,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
                 <Link href="/about" className="hover:text-primary transition-colors">
-                  About Orvane
+                  About Orvane Works
                 </Link>
               </li>
               <li>

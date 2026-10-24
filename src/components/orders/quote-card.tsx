@@ -74,7 +74,7 @@ export function QuoteCard({ order }: QuoteCardProps) {
             </Badge>
           </div>
           <CardDescription className="text-xs">
-            Official commercial proposal issued by Orvane founders.
+            Official commercial proposal issued by Orvane Works founders.
           </CardDescription>
         </div>
 

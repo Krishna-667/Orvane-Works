@@ -215,12 +215,13 @@ File storage is segregated into two Supabase buckets:
 
 ## 8. Transactional Email System
 
-Built on Resend and React Email (`src/lib/email/index.ts`), covering all 5 core studio events:
+Built on Resend and React Email (`src/lib/email/index.ts`), covering all **6 core studio events**:
 1. **Contact Inquiry Received**: Auto-acknowledgement to sender + notification alert to `COMPANY_INBOX`.
 2. **Order Received**: Confirmation to client with order reference number and dashboard link.
 3. **Order Status Changed**: Real-time update dispatched whenever an order advances along the 8 milestones.
 4. **Employee Application Decision**: Welcome onboarding email on approval, or constructive feedback email on rejection.
 5. **New Message Notification**: Alert delivered when a team member or client posts a message in an order thread.
+6. **Payment Received Confirmation**: Sent to client after each admin-recorded manual payment (UPI/bank/cash), including amount, type, method, and date.
 
 ---
 
@@ -248,3 +249,49 @@ In compliance with India's Digital Personal Data Protection Act 2023:
     - Flow 2: Employee applicant flow, awaiting approval holding view, admin queue approval, employee profile editor.
     - Flow 3: Contact inquiry form with Madurai coordinates and admin inbox verification.
 - **Visual Evidence**: 27 responsive screenshots captured in `docs/screenshots/` across mobile, tablet, and desktop.
+
+---
+
+## 11. Manual Payments System (Phase D)
+
+In Version 1, all payments are recorded manually by admin (no online payment gateway required).
+
+### Table: `order_payments`
+| Column | Type | Notes |
+|---|---|---|
+| `id` | uuid | PK |
+| `order_id` | uuid | FK → `orders.id`, cascade delete |
+| `amount_inr` | numeric(12,2) | Must be > 0 |
+| `payment_type` | enum | `advance` / `balance` / `full` |
+| `method` | enum | `upi` / `bank_transfer` / `cash` / `other` |
+| `reference_utr` | text | nullable — UPI ref / bank UTR |
+| `date_received` | date | Admin-entered date |
+| `notes` | text | nullable — admin-only internal note |
+| `recorded_by` | uuid | FK → `profiles.id` (admin) |
+| `provider` | text | Always `'manual'` in v1 (Razorpay reserved) |
+| `voided_at` | timestamptz | null = active; set = soft-deleted |
+| `void_reason` | text | Required when voiding |
+| `created_at` | timestamptz | Auto |
+
+### RLS Policy Summary
+- **Clients**: SELECT only for their own order payments. Application hides UTR and notes fields.
+- **Employees**: SELECT for assigned orders — application shows payment status chip only (no amounts).
+- **Admins**: Full CRUD.
+
+### Auto-Status Sync Trigger
+`trg_sync_order_payment_status` fires after every INSERT / UPDATE / DELETE on `order_payments`. It calls `sync_order_payment_status()` which:
+1. Sums all non-voided `amount_inr` for the order.
+2. Compares to `orders.quote_amount_inr`.
+3. Sets `orders.payment_status` → `invoiced` / `partially_paid` / `paid_in_full`.
+
+### Payment Status Calculation (Pure Function)
+```
+calculatePaymentStatus(quoteAmount, payments):
+  totalPaid = sum of non-voided amounts
+  if totalPaid == 0           → "Unpaid"
+  if quoteAmount is null/0    → "Advance Received"
+  if totalPaid >= quoteAmount → "Paid in Full"
+  if totalPaid <= 60% of quote→ "Advance Received"
+  else                        → "Partially Paid"
+```
+Tested in `src/__tests__/payments/payment-status.test.ts` (11 test cases).

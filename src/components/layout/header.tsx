@@ -48,7 +48,7 @@ export function Header() {
           />
           {/* Fallback text for tiny screens */}
           <span className="sm:hidden font-display text-lg font-bold tracking-tight text-foreground leading-none">
-            ORVANE<span className="text-primary">.</span>
+            ORVANE WORKS<span className="text-primary">.</span>
           </span>
         </Link>
 

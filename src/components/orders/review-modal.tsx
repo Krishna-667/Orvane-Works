@@ -65,7 +65,7 @@ export function ReviewModal({ orderId, orderNumber }: ReviewModalProps) {
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <MessageSquareQuote className="w-5 h-5 text-vermilion" />
-            Review Your Experience with Orvane
+            Review Your Experience with Orvane Works
           </DialogTitle>
           <DialogDescription className="text-xs">
             Your feedback helps our student engineering team grow and assists future clients across Tamil Nadu.
@@ -81,7 +81,7 @@ export function ReviewModal({ orderId, orderNumber }: ReviewModalProps) {
               Thank You for Your Review!
             </h4>
             <p className="text-xs text-muted-foreground max-w-xs mx-auto">
-              Your testimonial has been safely recorded. Once reviewed by our founders, it will appear on the Orvane public site.
+              Your testimonial has been safely recorded. Once reviewed by our founders, it will appear on the Orvane Works public site.
             </p>
             <Button
               onClick={() => {
@@ -157,11 +157,11 @@ export function ReviewModal({ orderId, orderNumber }: ReviewModalProps) {
                 name="content"
                 required
                 rows={4}
-                placeholder="Share your experience working with Orvane: the quality of delivery, speed of communication, and technical outcome..."
+                placeholder="Share your experience working with Orvane Works: the quality of delivery, speed of communication, and technical outcome..."
                 className="text-xs"
               />
               <p className="text-[10px] text-muted-foreground">
-                All client reviews are moderated by Orvane studio admins before being published to the website.
+                All client reviews are moderated by Orvane Works studio admins before being published to the website.
               </p>
             </div>
 
