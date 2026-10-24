@@ -54,7 +54,7 @@ export default function EmployeeProfileEditorPage() {
   // Form State
   const [name, setName] = React.useState("Karthik Rajan");
   const [avatarUrl, setAvatarUrl] = React.useState(
-    "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80"
+    "/team/karthik-rajan.jpg"
   );
   const [designation, setDesignation] = React.useState(
     "Lead Full-Stack Engineer & Founder"
@@ -301,11 +301,11 @@ export default function EmployeeProfileEditorPage() {
 
               <div className="space-y-1.5">
                 <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Profile Photo URL
+                  Profile Photo URL (JPG, JPEG, PNG, or relative path)
                 </label>
                 <Input
-                  type="url"
-                  placeholder="https://images.unsplash.com/..."
+                  type="text"
+                  placeholder="e.g. /team/karthik-rajan.jpg or https://...photo.jpg"
                   value={avatarUrl}
                   onChange={(e) => setAvatarUrl(e.target.value)}
                 />

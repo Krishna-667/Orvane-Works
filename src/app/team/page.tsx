@@ -75,7 +75,7 @@ export default async function TeamPage() {
               {/* Photo */}
               <div className="relative aspect-[4/3] w-full bg-muted overflow-hidden">
                 <Image
-                  src={member.avatar_url || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80"}
+                  src={member.avatar_url || "/team/karthik-rajan.jpg"}
                   alt={member.name}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

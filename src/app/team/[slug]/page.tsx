@@ -97,7 +97,7 @@ export default async function TeamMemberDetailPage({ params }: TeamDetailPagePro
         <div className="md:col-span-4 space-y-6">
           <div className="relative aspect-square w-full rounded-2xl overflow-hidden border border-border shadow-md bg-muted">
             <Image
-              src={member.avatar_url || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&auto=format&fit=crop&q=80"}
+              src={member.avatar_url || "/team/karthik-rajan.jpg"}
               alt={member.name}
               fill
               priority

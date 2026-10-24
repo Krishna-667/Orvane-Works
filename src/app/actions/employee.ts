@@ -26,7 +26,14 @@ const updateProfileSchema = z.object({
   github_url: z.string().url().optional().or(z.literal("")),
   linkedin_url: z.string().url().optional().or(z.literal("")),
   website_url: z.string().url().optional().or(z.literal("")),
-  avatar_url: z.string().url().optional().or(z.literal("")),
+  avatar_url: z
+    .string()
+    .refine(
+      (val) => !val || val.startsWith("/") || /^https?:\/\/.+/i.test(val),
+      { message: "Must be a valid URL or relative path (e.g. /team/photo.jpg)." }
+    )
+    .optional()
+    .or(z.literal("")),
 });
 
 export type UpdateProfileInput = z.infer<typeof updateProfileSchema>;
