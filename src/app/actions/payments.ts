@@ -91,8 +91,8 @@ export async function recordPaymentAction(
       actor_id: (await supabase.auth.getUser()).data.user!.id,
       action: "PAYMENT_RECORDED",
       entity_type: "order_payments",
-      details: {
-        order_id: parsed.data.order_id,
+      entity_id: parsed.data.order_id,
+      metadata: {
         order_number: parsed.data.order_number,
         amount_inr: parsed.data.amount_inr,
         method: parsed.data.method,
@@ -152,8 +152,8 @@ export async function voidPaymentAction(
       actor_id: (await supabase.auth.getUser()).data.user!.id,
       action: "PAYMENT_VOIDED",
       entity_type: "order_payments",
-      details: {
-        payment_id: parsed.data.payment_id,
+      entity_id: parsed.data.payment_id,
+      metadata: {
         void_reason: parsed.data.void_reason,
       },
     });

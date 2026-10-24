@@ -86,7 +86,7 @@ export const DEMO_EMPLOYEE_REQUESTS: EmployeeRequestItem[] = [
     portfolio_url: "https://behance.net/kavithaselvam",
     skills: ["Premiere Pro", "After Effects", "DaVinci Resolve", "Sound Design"],
     cover_note:
-      "Passionate video editor and colorist specializing in 9:16 high-retention reel edits and YouTube storytelling. Seeking to join Orvane's video team.",
+      "Passionate video editor and colorist specializing in 9:16 high-retention reel edits and YouTube storytelling. Seeking to join Orvane Works' video team.",
     status: "pending",
     created_at: "2026-10-23T08:15:00Z",
   },

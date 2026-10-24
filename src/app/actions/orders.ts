@@ -108,7 +108,7 @@ export async function createOrderAction(
       action: "ORDER_CREATED",
       entity_type: "orders",
       entity_id: orderId,
-      details: { order_number: orderNumber, service_id: parsed.data.service_id },
+      metadata: { order_number: orderNumber, service_id: parsed.data.service_id },
     });
 
     // Send confirmation email
@@ -263,7 +263,8 @@ export async function submitOrderReviewAction(
       actor_id: user.id,
       action: "REVIEW_SUBMITTED",
       entity_type: "testimonials",
-      details: { order_id: parsed.data.order_id, rating: parsed.data.rating },
+      entity_id: parsed.data.order_id,
+      metadata: { order_id: parsed.data.order_id, rating: parsed.data.rating },
     });
   } catch (err) {
     console.error("[Review Exception]", err);

@@ -64,7 +64,7 @@ export async function approveEmployeeAction(
         user_id: userId,
         slug,
         designation: "Student Engineering Specialist",
-        bio: "Engineering student contributor at Orvane Studio.",
+        bio: "Engineering student contributor at Orvane Works.",
         availability_status: "available",
         is_published: true,
         display_order: 10,

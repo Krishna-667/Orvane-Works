@@ -91,7 +91,7 @@ export async function exportMyDataAction(): Promise<ClientActionResult> {
       .eq("sender_id", user.id);
 
     const exportBundle = {
-      notice: "Orvane Studio - DPDP Act 2023 Personal Data Export",
+      notice: "Orvane Works - DPDP Act 2023 Personal Data Export",
       generated_at: new Date().toISOString(),
       profile: {
         id: profile.id,
