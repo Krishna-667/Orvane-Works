@@ -340,7 +340,78 @@ export async function sendEmployeeDecisionEmail({
 }
 
 /**
- * 6. New Message Received (to client or team)
+ * 6. Payment Recorded Confirmation (to client)
+ */
+export async function sendPaymentConfirmationEmail({
+  clientName,
+  clientEmail,
+  orderNumber,
+  amountInr,
+  paymentType,
+  method,
+  dateReceived,
+}: {
+  clientName: string;
+  clientEmail: string;
+  orderNumber: string;
+  amountInr: number;
+  paymentType: "advance" | "balance" | "full";
+  method: string;
+  dateReceived: string;
+}) {
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const typeLabel =
+    paymentType === "advance" ? "Advance Payment" :
+    paymentType === "balance" ? "Balance Payment" : "Full Payment";
+  const methodLabel =
+    method === "upi" ? "UPI" :
+    method === "bank_transfer" ? "Bank Transfer" :
+    method === "cash" ? "Cash" : "Other";
+  const formattedAmount = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 0,
+  }).format(amountInr);
+
+  const html = wrapEmailHtml(
+    `Payment Received: ${orderNumber}`,
+    `
+    <div class="badge" style="background: #E8F5E9; color: #1E7E34;">Payment Received</div>
+    <h2 class="heading">Thank you, ${clientName}! Your payment has been recorded.</h2>
+    <p>We have received and confirmed the following payment for project <strong>${orderNumber}</strong>:</p>
+    <table style="width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 14px;">
+      <tr style="border-bottom: 1px solid #E5E1D8;">
+        <td style="padding: 8px 0; color: #6B7280;">Amount:</td>
+        <td style="padding: 8px 0; font-weight: 700; color: #111214;">${formattedAmount}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E5E1D8;">
+        <td style="padding: 8px 0; color: #6B7280;">Type:</td>
+        <td style="padding: 8px 0; font-weight: 600;">${typeLabel}</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #E5E1D8;">
+        <td style="padding: 8px 0; color: #6B7280;">Method:</td>
+        <td style="padding: 8px 0;">${methodLabel}</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 0; color: #6B7280;">Date:</td>
+        <td style="padding: 8px 0;">${dateReceived}</td>
+      </tr>
+    </table>
+    <p style="font-size: 13px; color: #6B7280;">You can view your full payment history and project progress in the client portal.</p>
+    <a href="${appUrl}/dashboard/orders/${orderNumber}" class="btn">View Order & Payment Status</a>
+    <p style="font-size: 12px; color: #9CA3AF; margin-top: 16px;">If you believe this payment was recorded in error, please reply to this email or contact us on WhatsApp immediately.</p>
+    `
+  );
+
+  return sendEmail({
+    to: clientEmail,
+    subject: `Payment Received for ${orderNumber} — ${SITE_CONFIG.name}`,
+    html,
+  });
+}
+
+/**
+ * 7. New Message Received (to client or team)
  */
 export async function sendNewMessageNotificationEmail({
   recipientName,

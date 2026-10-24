@@ -27,11 +27,13 @@ import { QuoteCard } from "@/components/orders/quote-card";
 import { MessageThread } from "@/components/orders/message-thread";
 import { FilesCard } from "@/components/orders/files-card";
 import { ReviewModal } from "@/components/orders/review-modal";
+import { ClientPaymentCard } from "@/components/payments/client-payment-card";
 import {
   getOrderByNumber,
   getOrderMessages,
   getOrderFiles,
 } from "@/lib/data/orders";
+import { getOrderPaymentSummary } from "@/lib/data/payments";
 import { formatDate, formatINR, formatContactMethod } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
@@ -55,9 +57,10 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
     notFound();
   }
 
-  const [messages, files] = await Promise.all([
+  const [messages, files, paymentSummary] = await Promise.all([
     getOrderMessages(params.orderNumber, order.id),
     getOrderFiles(params.orderNumber, order.id),
+    getOrderPaymentSummary(order.id, order.quote_amount_inr),
   ]);
 
   const canReview = order.status === "delivered" || order.status === "closed";
@@ -190,6 +193,9 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
         <div className="space-y-6">
           {/* Financial Quote Card */}
           <QuoteCard order={order} />
+
+          {/* Payment Status & How to Pay */}
+          <ClientPaymentCard summary={paymentSummary} />
 
           {/* Project Details & Assigned Team Lead */}
           <Card className="border-border">

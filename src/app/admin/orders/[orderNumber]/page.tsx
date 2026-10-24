@@ -24,11 +24,13 @@ import { StatusTimeline } from "@/components/orders/status-timeline";
 import { MessageThread } from "@/components/orders/message-thread";
 import { FilesCard } from "@/components/orders/files-card";
 import { AdminOrderWorkbench } from "./admin-order-workbench";
+import { AdminPaymentsPanel } from "@/components/payments/admin-payments-panel";
 import {
   getOrderByNumber,
   getOrderMessages,
   getOrderFiles,
 } from "@/lib/data/orders";
+import { getOrderPaymentSummary } from "@/lib/data/payments";
 import { getAllEmployeesAdmin } from "@/lib/data/admin";
 import { formatDate, formatContactMethod } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants/site";
@@ -60,9 +62,10 @@ export default async function AdminOrderDetailPage({
     notFound();
   }
 
-  const [messages, files] = await Promise.all([
+  const [messages, files, paymentSummary] = await Promise.all([
     getOrderMessages(params.orderNumber, order.id),
     getOrderFiles(params.orderNumber, order.id),
+    getOrderPaymentSummary(order.id, order.quote_amount_inr),
   ]);
 
   return (
@@ -121,8 +124,15 @@ export default async function AdminOrderDetailPage({
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Columns: Admin Governance Workbench + Message Thread */}
         <div className="lg:col-span-2 space-y-6">
-          {/* Admin Order Workbench (Lead Assignment, Quote, Payment, Private Notes) */}
+          {/* Admin Order Workbench (Lead Assignment, Quote, Payment Status, Private Notes) */}
           <AdminOrderWorkbench order={order} employees={employees} />
+
+          {/* Payments Panel — record and manage manual UPI/bank/cash payments */}
+          <AdminPaymentsPanel
+            orderId={order.id}
+            orderNumber={order.order_number}
+            summary={paymentSummary}
+          />
 
           {/* Deliverables and Files */}
           <FilesCard files={files} orderNumber={order.order_number} />
