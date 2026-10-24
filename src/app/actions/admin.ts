@@ -1,6 +1,6 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/auth/guards";
@@ -92,6 +92,7 @@ export async function approveEmployeeAction(
 
     revalidatePath("/admin/employees");
     revalidatePath("/team");
+    revalidateTag("public-content"); // bust cached getTeamMembers()
     return { success: true, message: "Applicant approved and welcomed to the team!" };
   } catch (err: any) {
     console.error("[Approve Employee Error]", err);
@@ -454,6 +455,7 @@ export async function moderateTestimonialAction(
     revalidatePath("/admin/content");
     revalidatePath("/testimonials");
     revalidatePath("/");
+    revalidateTag("public-content"); // bust cached getTestimonials()
     return { success: true, message: "Testimonial updated." };
   } catch (err: any) {
     return { success: false, error: err.message };

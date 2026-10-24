@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export interface ServiceItem {
@@ -59,7 +60,8 @@ export interface FaqItem {
   display_order: number;
 }
 
-// Fallback seed catalog (strictly labelled as demo placeholders)
+// ─── Fallback seed catalog (strictly labelled as demo placeholders) ───────────
+
 export const DEFAULT_SERVICES: ServiceItem[] = [
   {
     id: "00000000-0000-0000-0000-000000000001",
@@ -315,100 +317,113 @@ export const DEFAULT_FAQS: FaqItem[] = [
   },
 ];
 
-// Content Fetchers with Supabase + Fallback
-export async function getServices(): Promise<ServiceItem[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("services")
-      .select("*")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
+// ─── Cached Content Fetchers ──────────────────────────────────────────────────
+// unstable_cache wraps each Supabase call so results are stored in the
+// Next.js Data Cache and reused across requests until revalidated via tag.
+// Admin server actions call revalidateTag('public-content') after mutations.
 
-    if (!error && data && data.length > 0) {
-      return data as ServiceItem[];
-    }
-  } catch {}
-  return DEFAULT_SERVICES;
-}
+const CACHE_OPTS = { tags: ["public-content"], revalidate: 300 }; // 5 min max-age
+
+export const getServices = unstable_cache(
+  async (): Promise<ServiceItem[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("services")
+        .select("*")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      if (!error && data && data.length > 0) return data as ServiceItem[];
+    } catch {}
+    return DEFAULT_SERVICES;
+  },
+  ["services-list"],
+  CACHE_OPTS
+);
 
 export async function getServiceBySlug(slug: string): Promise<ServiceItem | null> {
   const services = await getServices();
   return services.find((s) => s.slug === slug) || null;
 }
 
-export async function getPackages(): Promise<PackageItem[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("packages")
-      .select("*")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
-
-    if (!error && data && data.length > 0) {
-      return data as PackageItem[];
-    }
-  } catch {}
-  return DEFAULT_PACKAGES;
-}
+export const getPackages = unstable_cache(
+  async (): Promise<PackageItem[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("packages")
+        .select("*")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      if (!error && data && data.length > 0) return data as PackageItem[];
+    } catch {}
+    return DEFAULT_PACKAGES;
+  },
+  ["packages-list"],
+  CACHE_OPTS
+);
 
 export async function getPackagesByService(serviceId: string): Promise<PackageItem[]> {
   const packages = await getPackages();
   return packages.filter((p) => p.service_id === serviceId);
 }
 
-export async function getPortfolioProjects(): Promise<PortfolioProject[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("portfolio_projects")
-      .select("*, services(title)")
-      .order("display_order", { ascending: true });
-
-    if (!error && data && data.length > 0) {
-      return data.map((d: any) => ({
-        ...d,
-        service_title: d.services?.title,
-      })) as PortfolioProject[];
-    }
-  } catch {}
-  return DEFAULT_PORTFOLIO;
-}
+export const getPortfolioProjects = unstable_cache(
+  async (): Promise<PortfolioProject[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("portfolio_projects")
+        .select("*, services(title)")
+        .order("display_order", { ascending: true });
+      if (!error && data && data.length > 0) {
+        return data.map((d: any) => ({
+          ...d,
+          service_title: d.services?.title,
+        })) as PortfolioProject[];
+      }
+    } catch {}
+    return DEFAULT_PORTFOLIO;
+  },
+  ["portfolio-list"],
+  CACHE_OPTS
+);
 
 export async function getProjectBySlug(slug: string): Promise<PortfolioProject | null> {
   const projects = await getPortfolioProjects();
   return projects.find((p) => p.slug === slug) || null;
 }
 
-export async function getTestimonials(): Promise<TestimonialItem[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("testimonials")
-      .select("*")
-      .eq("is_approved", true)
-      .order("display_order", { ascending: true });
+export const getTestimonials = unstable_cache(
+  async (): Promise<TestimonialItem[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("testimonials")
+        .select("*")
+        .eq("is_approved", true)
+        .order("display_order", { ascending: true });
+      if (!error && data && data.length > 0) return data as TestimonialItem[];
+    } catch {}
+    return DEFAULT_TESTIMONIALS;
+  },
+  ["testimonials-list"],
+  CACHE_OPTS
+);
 
-    if (!error && data && data.length > 0) {
-      return data as TestimonialItem[];
-    }
-  } catch {}
-  return DEFAULT_TESTIMONIALS;
-}
-
-export async function getFaqs(): Promise<FaqItem[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("faqs")
-      .select("*")
-      .eq("is_active", true)
-      .order("display_order", { ascending: true });
-
-    if (!error && data && data.length > 0) {
-      return data as FaqItem[];
-    }
-  } catch {}
-  return DEFAULT_FAQS;
-}
+export const getFaqs = unstable_cache(
+  async (): Promise<FaqItem[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("faqs")
+        .select("*")
+        .eq("is_active", true)
+        .order("display_order", { ascending: true });
+      if (!error && data && data.length > 0) return data as FaqItem[];
+    } catch {}
+    return DEFAULT_FAQS;
+  },
+  ["faqs-list"],
+  CACHE_OPTS
+);

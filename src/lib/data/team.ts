@@ -1,3 +1,4 @@
+import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export interface ExperienceEntry {
@@ -170,28 +171,33 @@ export const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
   },
 ];
 
-export async function getTeamMembers(): Promise<TeamMember[]> {
-  try {
-    const supabase = createClient();
-    const { data, error } = await supabase
-      .from("employee_profiles")
-      .select("*, profiles(full_name, avatar_url)")
-      .eq("is_published", true)
-      .order("display_order", { ascending: true });
+// Cache team data — 5-minute TTL, tag: "public-content"
+export const getTeamMembers = unstable_cache(
+  async (): Promise<TeamMember[]> => {
+    try {
+      const supabase = createClient();
+      const { data, error } = await supabase
+        .from("employee_profiles")
+        .select("*, profiles(full_name, avatar_url)")
+        .eq("is_published", true)
+        .order("display_order", { ascending: true });
 
-    if (!error && data && data.length > 0) {
-      // Map Supabase rows to TeamMember type
-      return data.map((d: any) => ({
-        ...d,
-        name: d.profiles?.full_name || "Orvane Works Specialist",
-        avatar_url: d.profiles?.avatar_url || DEFAULT_TEAM_MEMBERS[0].avatar_url,
-        specializations: DEFAULT_TEAM_MEMBERS[0].specializations,
-        experience: DEFAULT_TEAM_MEMBERS[0].experience,
-      }));
-    }
-  } catch {}
-  return DEFAULT_TEAM_MEMBERS;
-}
+      if (!error && data && data.length > 0) {
+        // Map Supabase rows to TeamMember type
+        return data.map((d: any) => ({
+          ...d,
+          name: d.profiles?.full_name || "Orvane Works Specialist",
+          avatar_url: d.profiles?.avatar_url || DEFAULT_TEAM_MEMBERS[0].avatar_url,
+          specializations: DEFAULT_TEAM_MEMBERS[0].specializations,
+          experience: DEFAULT_TEAM_MEMBERS[0].experience,
+        }));
+      }
+    } catch {}
+    return DEFAULT_TEAM_MEMBERS;
+  },
+  ["team-members-list"],
+  { tags: ["public-content"], revalidate: 300 }
+);
 
 export async function getTeamMemberBySlug(slug: string): Promise<TeamMember | null> {
   const members = await getTeamMembers();
