@@ -72,10 +72,82 @@ export default function ContactPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        {/* Left Form (7 cols) */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+        {/* Left: Direct Communication & Details (5 cols on lg, 1st on mobile) */}
+        <div className="lg:col-span-5 space-y-6">
+          <Card className="border-border shadow-sm">
+            <CardHeader>
+              <CardTitle className="text-lg">Direct Communication</CardTitle>
+              <CardDescription className="text-xs">
+                Reach our student leads directly via mail or WhatsApp.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4 text-sm">
+              <div className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-foreground block text-xs">
+                    Mail Us Directly
+                  </span>
+                  <a
+                    href={`mailto:${SITE_CONFIG.email}`}
+                    className="text-primary hover:underline"
+                  >
+                    {SITE_CONFIG.email}
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-foreground block text-xs">
+                    Quick WhatsApp Chat
+                  </span>
+                  <a
+                    href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
+                      SITE_CONFIG.whatsappDefaultMessage
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    +91 98765 43210 (Click to chat)
+                  </a>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <div>
+                  <span className="font-semibold text-foreground block text-xs">
+                    Madurai Studio Hub
+                  </span>
+                  <span className="text-muted-foreground text-xs leading-relaxed">
+                    Madurai, Tamil Nadu 625020, India
+                  </span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="rounded-xl border border-border bg-card p-6 space-y-3 shadow-sm">
+            <h4 className="font-semibold text-sm text-foreground">
+              Prefer an itemized formal quote?
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              You can sign up for our Client Portal to submit structured briefs,
+              upload reference files, and receive formal proposals.
+            </p>
+            <a href="/login" className="inline-block text-xs font-semibold text-primary hover:underline">
+              Go to Client Portal Login →
+            </a>
+          </div>
+        </div>
+
+        {/* Right: Message Form (7 cols on lg, 2nd on mobile) */}
         <div className="lg:col-span-7">
-          <Card className="shadow-lg border-border">
+          <Card className="shadow-sm border-border">
             <CardHeader>
               <CardTitle className="text-xl">Send Us a Project Message</CardTitle>
               <CardDescription className="text-xs">
@@ -212,7 +284,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={isLoading}
                     size="lg"
-                    className="w-full gap-2 font-semibold"
+                    className="w-full gap-2 font-semibold bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500"
                   >
                     {isLoading ? "Sending Message..." : "Send Message"}
                     <Send className="w-4 h-4" />
@@ -221,78 +293,6 @@ export default function ContactPage() {
               )}
             </CardContent>
           </Card>
-        </div>
-
-        {/* Right Info Details & Links (5 cols) */}
-        <div className="lg:col-span-5 space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Direct Communication</CardTitle>
-              <CardDescription className="text-xs">
-                Reach our student leads directly via mail or WhatsApp.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4 text-sm">
-              <div className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-foreground block text-xs">
-                    Mail Us Directly
-                  </span>
-                  <a
-                    href={`mailto:${SITE_CONFIG.email}`}
-                    className="text-primary hover:underline"
-                  >
-                    {SITE_CONFIG.email}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MessageCircle className="w-5 h-5 text-[#25D366] shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-foreground block text-xs">
-                    Quick WhatsApp Chat
-                  </span>
-                  <a
-                    href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-                      SITE_CONFIG.whatsappDefaultMessage
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    +91 98765 43210 (Click to chat)
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <div>
-                  <span className="font-semibold text-foreground block text-xs">
-                    Madurai Studio Hub
-                  </span>
-                  <span className="text-muted-foreground text-xs leading-relaxed">
-                    Madurai, Tamil Nadu 625020, India
-                  </span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="rounded-xl border border-border bg-card p-6 space-y-3">
-            <h4 className="font-semibold text-sm text-foreground">
-              Prefer an itemized formal quote?
-            </h4>
-            <p className="text-xs text-muted-foreground leading-relaxed">
-              You can sign up for our Client Portal to submit structured briefs,
-              upload reference files, and receive formal proposals.
-            </p>
-            <a href="/login" className="inline-block text-xs font-semibold text-primary hover:underline">
-              Go to Client Portal Login →
-            </a>
-          </div>
         </div>
       </div>
     </div>

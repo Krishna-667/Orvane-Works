@@ -75,7 +75,7 @@ export function StatusTimeline({ currentStatus, className }: StatusTimelineProps
                     isCompleted &&
                       "bg-primary text-primary-foreground border-primary",
                     isCurrent &&
-                      "bg-vermilion text-white border-vermilion ring-4 ring-vermilion/20 animate-pulse",
+                      "bg-primary text-primary-foreground border-primary ring-4 ring-primary/20 animate-pulse",
                     isPending &&
                       "bg-background text-muted-foreground border-border"
                   )}

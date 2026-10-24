@@ -80,7 +80,7 @@ export function OrdersClient({ initialOrders }: OrdersClientProps) {
               onClick={() => setFilterStatus(s.value)}
               className={`px-2.5 py-1 rounded text-xs transition-colors ${
                 filterStatus === s.value
-                  ? "bg-vermilion text-white font-semibold"
+                  ? "bg-primary text-primary-foreground font-semibold"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >

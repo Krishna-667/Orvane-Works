@@ -21,7 +21,7 @@ import {
 } from "@/components/ui/card";
 import { StatusChip } from "@/components/ui/status-chip";
 import { getClientOrders } from "@/lib/data/orders";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatContactMethod } from "@/lib/utils";
 
 export default async function EmployeeDashboardPage() {
   const allOrders = await getClientOrders();
@@ -158,7 +158,7 @@ export default async function EmployeeDashboardPage() {
                   </div>
 
                   <Link href={`/employee/orders/${order.order_number}`}>
-                    <Button size="sm" className="gap-1.5 bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs">
+                    <Button size="sm" className="gap-1.5 bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-medium text-xs">
                       <Upload className="w-4 h-4" />
                       Manage &amp; Upload
                     </Button>
@@ -173,7 +173,7 @@ export default async function EmployeeDashboardPage() {
                     </span>
                     <span className="flex items-center gap-1.5">
                       <MessageSquare className="w-3.5 h-3.5 text-vermilion" />
-                      Contact via {order.preferred_contact_method}
+                      Contact via {formatContactMethod(order.preferred_contact_method)}
                     </span>
                   </div>
                 </CardContent>

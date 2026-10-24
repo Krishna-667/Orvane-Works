@@ -147,7 +147,7 @@ export function StatusUpdater({
               type="submit"
               disabled={isSubmitting}
               size="sm"
-              className="bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs gap-1.5"
+              className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-medium text-xs gap-1.5"
             >
               {isSubmitting ? "Advancing..." : "Update Status"}
               <ArrowRight className="w-3.5 h-3.5" />

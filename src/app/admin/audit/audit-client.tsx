@@ -64,7 +64,7 @@ export function AuditClient({ initialLogs }: AuditClientProps) {
               onClick={() => setFilterAction(act)}
               className={`px-2.5 py-1 rounded text-[11px] transition-colors ${
                 filterAction === act
-                  ? "bg-vermilion text-white font-semibold"
+                  ? "bg-primary text-primary-foreground font-semibold"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >

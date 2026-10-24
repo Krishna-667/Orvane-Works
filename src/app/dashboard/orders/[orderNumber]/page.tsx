@@ -32,7 +32,7 @@ import {
   getOrderMessages,
   getOrderFiles,
 } from "@/lib/data/orders";
-import { formatDate, formatINR } from "@/lib/utils";
+import { formatDate, formatINR, formatContactMethod } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
 interface OrderDetailPageProps {
@@ -210,8 +210,8 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
 
               <div className="flex items-center justify-between py-1.5 border-b border-border/60">
                 <span className="text-muted-foreground">Preferred Contact:</span>
-                <span className="font-semibold capitalize text-foreground">
-                  {order.preferred_contact_method}
+                <span className="font-semibold text-foreground">
+                  {formatContactMethod(order.preferred_contact_method)}
                 </span>
               </div>
 

@@ -73,7 +73,7 @@ export default async function AdminDashboardPage() {
             </Button>
           </Link>
           <Link href="/admin/orders">
-            <Button size="sm" className="gap-1.5 text-xs bg-vermilion hover:bg-vermilion/90 text-white font-medium">
+            <Button size="sm" className="gap-1.5 text-xs bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-medium">
               <FolderKanban className="w-3.5 h-3.5" />
               Orders ({orders.length})
             </Button>
@@ -194,7 +194,7 @@ export default async function AdminDashboardPage() {
                 </div>
 
                 <Link href="/admin/employees" className="shrink-0">
-                  <Button size="sm" className="h-8 text-xs bg-vermilion hover:bg-vermilion/90 text-white font-medium">
+                  <Button size="sm" className="h-8 text-xs bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-medium">
                     Review Application
                   </Button>
                 </Link>

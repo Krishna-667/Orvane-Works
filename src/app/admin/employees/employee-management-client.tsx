@@ -197,7 +197,7 @@ export function EmployeeManagementClient({
         {/* Direct Invite Dialog */}
         <Dialog open={inviteOpen} onOpenChange={setInviteOpen}>
           <DialogTrigger asChild>
-            <Button size="sm" className="gap-1.5 font-medium text-xs bg-vermilion hover:bg-vermilion/90 text-white">
+            <Button size="sm" className="gap-1.5 font-medium text-xs bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500">
               <Plus className="w-4 h-4" />
               Invite Specialist by Email
             </Button>
@@ -255,7 +255,7 @@ export function EmployeeManagementClient({
                   type="submit"
                   disabled={isInviting}
                   size="sm"
-                  className="bg-vermilion hover:bg-vermilion/90 text-white font-semibold"
+                  className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-semibold"
                 >
                   {isInviting ? "Sending..." : "Send Invitation"}
                 </Button>

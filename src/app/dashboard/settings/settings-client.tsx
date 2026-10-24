@@ -230,7 +230,7 @@ export function SettingsClient({ initialProfile }: SettingsClientProps) {
               <Button
                 type="submit"
                 disabled={isSaving}
-                className="bg-vermilion hover:bg-vermilion/90 text-white font-semibold"
+                className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-semibold"
               >
                 {isSaving ? "Saving..." : "Save Changes"}
               </Button>

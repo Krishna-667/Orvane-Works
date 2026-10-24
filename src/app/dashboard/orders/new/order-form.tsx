@@ -117,7 +117,7 @@ export function OrderForm({ services, packages, teamMembers }: OrderFormProps) {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-vermilion text-white text-xs font-bold flex items-center justify-center">
+            <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
               1
             </span>
             <CardTitle className="text-xl">Choose Service &amp; Scope</CardTitle>
@@ -235,7 +235,7 @@ export function OrderForm({ services, packages, teamMembers }: OrderFormProps) {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-vermilion text-white text-xs font-bold flex items-center justify-center">
+            <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
               2
             </span>
             <CardTitle className="text-xl">Project Details &amp; Brief</CardTitle>
@@ -308,7 +308,7 @@ export function OrderForm({ services, packages, teamMembers }: OrderFormProps) {
       <Card>
         <CardHeader>
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-full bg-vermilion text-white text-xs font-bold flex items-center justify-center">
+            <span className="w-6 h-6 rounded-full bg-primary text-primary-foreground text-xs font-bold flex items-center justify-center">
               3
             </span>
             <CardTitle className="text-xl">Budget, Timeline &amp; Team Preferences</CardTitle>
@@ -450,7 +450,7 @@ export function OrderForm({ services, packages, teamMembers }: OrderFormProps) {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto gap-2 font-semibold bg-vermilion hover:bg-vermilion/90 text-white"
+            className="w-full sm:w-auto gap-2 font-semibold bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500"
           >
             {isSubmitting ? (
               <span>Submitting Brief...</span>

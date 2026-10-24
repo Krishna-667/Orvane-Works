@@ -178,7 +178,7 @@ export function ReviewModal({ orderId, orderNumber }: ReviewModalProps) {
                 type="submit"
                 disabled={isSubmitting}
                 size="sm"
-                className="bg-vermilion hover:bg-vermilion/90 text-white font-semibold"
+                className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-semibold"
               >
                 {isSubmitting ? "Submitting..." : "Submit Review"}
               </Button>

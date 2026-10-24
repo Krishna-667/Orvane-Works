@@ -123,7 +123,7 @@ export function DeliverableUploader({
               type="submit"
               disabled={isSubmitting || !fileName.trim()}
               size="sm"
-              className="bg-vermilion hover:bg-vermilion/90 text-white font-medium text-xs gap-1.5"
+              className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 font-medium text-xs gap-1.5"
             >
               {isSubmitting ? "Uploading..." : "Save Deliverable"}
               <PackageCheck className="w-3.5 h-3.5" />

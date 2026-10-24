@@ -116,7 +116,7 @@ export function QuoteCard({ order }: QuoteCardProps) {
                 <Button
                   onClick={handleAccept}
                   disabled={isAccepting}
-                  className="bg-vermilion hover:bg-vermilion/90 text-white gap-2 font-semibold shrink-0"
+                  className="bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 gap-2 font-semibold shrink-0"
                 >
                   {isAccepting ? (
                     "Confirming..."

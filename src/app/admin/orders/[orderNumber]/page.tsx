@@ -30,7 +30,7 @@ import {
   getOrderFiles,
 } from "@/lib/data/orders";
 import { getAllEmployeesAdmin } from "@/lib/data/admin";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatContactMethod } from "@/lib/utils";
 
 interface AdminOrderDetailPageProps {
   params: {
@@ -163,8 +163,8 @@ export default async function AdminOrderDetailPage({
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-muted-foreground">Preferred Contact:</span>
-                  <span className="font-semibold capitalize text-foreground">
-                    {order.preferred_contact_method}
+                  <span className="font-semibold text-foreground">
+                    {formatContactMethod(order.preferred_contact_method)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">

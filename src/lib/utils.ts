@@ -27,3 +27,15 @@ export function formatDate(dateStr: string | Date): string {
     year: "numeric",
   }).format(d);
 }
+
+/**
+ * Format preferred contact method with proper brand casing (e.g. WhatsApp)
+ */
+export function formatContactMethod(method?: string | null): string {
+  if (!method) return "WhatsApp";
+  const lower = method.toLowerCase();
+  if (lower === "whatsapp") return "WhatsApp";
+  if (lower === "email") return "Email";
+  if (lower === "phone") return "Phone Call";
+  return method;
+}

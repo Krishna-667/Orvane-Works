@@ -30,7 +30,7 @@ import {
   getOrderMessages,
   getOrderFiles,
 } from "@/lib/data/orders";
-import { formatDate } from "@/lib/utils";
+import { formatDate, formatContactMethod } from "@/lib/utils";
 
 interface EmployeeOrderDetailPageProps {
   params: {
@@ -205,8 +205,8 @@ export default async function EmployeeOrderDetailPage({
 
               <div className="flex items-center justify-between py-1.5">
                 <span className="text-muted-foreground">Preferred Contact:</span>
-                <span className="font-semibold capitalize text-foreground">
-                  {order.preferred_contact_method}
+                <span className="font-semibold text-foreground">
+                  {formatContactMethod(order.preferred_contact_method)}
                 </span>
               </div>
             </CardContent>

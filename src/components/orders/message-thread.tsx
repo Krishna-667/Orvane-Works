@@ -121,7 +121,7 @@ export function MessageThread({
                   <div
                     className={`p-3 rounded-lg max-w-[85%] text-xs leading-relaxed ${
                       isClient
-                        ? "bg-vermilion text-white rounded-tr-none"
+                        ? "bg-primary text-primary-foreground rounded-tr-none"
                         : "bg-muted text-foreground border border-border rounded-tl-none"
                     }`}
                   >
@@ -154,7 +154,7 @@ export function MessageThread({
             <Button
               type="submit"
               disabled={isSubmitting || !content.trim()}
-              className="h-auto px-4 bg-vermilion hover:bg-vermilion/90 text-white shrink-0"
+              className="h-auto px-4 bg-primary text-primary-foreground hover:bg-vermilion-700 dark:hover:bg-vermilion-500 shrink-0"
             >
               <Send className="w-4 h-4" />
               <span className="sr-only">Send message</span>

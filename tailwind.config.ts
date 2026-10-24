@@ -41,6 +41,8 @@ const config: Config = {
           950: "#111214", // Main Ink Text
         },
         vermilion: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
           50: "#FEF3F0",
           100: "#FDE4DE",
           200: "#FACEC4",
