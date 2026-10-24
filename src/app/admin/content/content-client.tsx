@@ -10,9 +10,13 @@ import {
   Settings,
   Sparkles,
   HelpCircle,
+  Save,
+  Loader2,
+  CreditCard,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
 import {
   Card,
   CardContent,
@@ -20,7 +24,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { moderateTestimonialAction } from "@/app/actions/admin";
+import { moderateTestimonialAction, updateSiteSettingAction } from "@/app/actions/admin";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import type { ServiceItem, TestimonialItem, FaqItem } from "@/lib/data/content";
 
@@ -28,12 +32,14 @@ interface ContentClientProps {
   initialServices: ServiceItem[];
   initialTestimonials: TestimonialItem[];
   initialFaqs: FaqItem[];
+  initialPaymentInstructions: string;
 }
 
 export function ContentClient({
   initialServices,
   initialTestimonials,
   initialFaqs,
+  initialPaymentInstructions,
 }: ContentClientProps) {
   const [activeTab, setActiveTab] = useState<"testimonials" | "services" | "settings">(
     "testimonials"
@@ -46,6 +52,10 @@ export function ContentClient({
       is_approved: true, // Default seeds are approved
     }))
   );
+  // Payment instructions editor state
+  const [paymentInstructions, setPaymentInstructions] = useState(initialPaymentInstructions);
+  const [isSavingInstructions, setIsSavingInstructions] = useState(false);
+  const [instructionsSaved, setInstructionsSaved] = useState<string | null>(null);
 
   const handleToggleApprove = async (id: string, current: boolean, featured: boolean) => {
     const nextApproved = !current;
@@ -68,6 +78,19 @@ export function ContentClient({
       await moderateTestimonialAction(id, approved, nextFeatured);
     } catch (err) {
       console.error(err);
+    }
+  };
+
+  const handleSaveInstructions = async () => {
+    setIsSavingInstructions(true);
+    setInstructionsSaved(null);
+    try {
+      const result = await updateSiteSettingAction("payment_instructions", paymentInstructions);
+      setInstructionsSaved(result.success ? "Saved! Instructions updated for all client portals." : (result.error || "Failed to save."));
+    } catch {
+      setInstructionsSaved("Unexpected error saving instructions.");
+    } finally {
+      setIsSavingInstructions(false);
     }
   };
 
@@ -256,44 +279,99 @@ export function ContentClient({
           <CardHeader className="pb-3 border-b border-border/80">
             <CardTitle className="text-base flex items-center gap-2">
               <Settings className="w-4 h-4 text-vermilion" />
-              Studio Coordinates &amp; Social Links
+              Studio Coordinates &amp; Site Settings
             </CardTitle>
             <CardDescription className="text-xs">
-              Key contact parameters shown in the header, footer, and floating WhatsApp trigger.
+              Key contact parameters and client-facing instructions. Changes take effect immediately across all client order portals.
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="p-4 space-y-4 text-xs">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="space-y-1">
-                <span className="font-semibold text-muted-foreground block">
-                  Studio Locality &amp; Address
-                </span>
-                <p className="font-medium text-foreground">{SITE_CONFIG.address}</p>
-              </div>
+          <CardContent className="p-4 space-y-6 text-xs">
+            {/* Contact Coordinates (read-only — edit via SITE_CONFIG) */}
+            <div className="space-y-3">
+              <p className="font-semibold text-muted-foreground uppercase tracking-wider text-[11px]">
+                Studio Contact Coordinates
+              </p>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <span className="font-semibold text-muted-foreground block">
+                    Studio Locality &amp; Address
+                  </span>
+                  <p className="font-medium text-foreground">{SITE_CONFIG.address}</p>
+                </div>
 
-              <div className="space-y-1">
-                <span className="font-semibold text-muted-foreground block">
-                  Official Email Inbox
-                </span>
-                <p className="font-mono text-foreground">{SITE_CONFIG.email}</p>
-              </div>
+                <div className="space-y-1">
+                  <span className="font-semibold text-muted-foreground block">
+                    Official Email Inbox
+                  </span>
+                  <p className="font-mono text-foreground">{SITE_CONFIG.email}</p>
+                </div>
 
-              <div className="space-y-1">
-                <span className="font-semibold text-muted-foreground block">
-                  WhatsApp Helpline Number
-                </span>
-                <p className="font-mono text-foreground">+{SITE_CONFIG.whatsappNumber}</p>
-              </div>
+                <div className="space-y-1">
+                  <span className="font-semibold text-muted-foreground block">
+                    WhatsApp Helpline Number
+                  </span>
+                  <p className="font-mono text-foreground">+{SITE_CONFIG.whatsappNumber}</p>
+                </div>
 
-              <div className="space-y-1">
-                <span className="font-semibold text-muted-foreground block">
-                  Social Channels
-                </span>
-                <p className="text-muted-foreground">
-                  Instagram: {SITE_CONFIG.socials.instagram} <br />
-                  LinkedIn: {SITE_CONFIG.socials.linkedin}
+                <div className="space-y-1">
+                  <span className="font-semibold text-muted-foreground block">
+                    Social Channels
+                  </span>
+                  <p className="text-muted-foreground">
+                    Instagram: {SITE_CONFIG.socials.instagram} <br />
+                    LinkedIn: {SITE_CONFIG.socials.linkedin}
+                  </p>
+                </div>
+              </div>
+              <p className="text-[11px] text-muted-foreground/70 italic">
+                To update contact coordinates, edit <code className="bg-muted px-1 rounded">src/lib/constants/site.ts</code> and redeploy.
+              </p>
+            </div>
+
+            {/* Payment Instructions (editable via site_settings table) */}
+            <div className="pt-4 border-t border-border space-y-3">
+              <div className="flex items-center gap-2">
+                <CreditCard className="w-4 h-4 text-vermilion" />
+                <p className="font-semibold text-foreground text-sm">Client Payment Instructions</p>
+              </div>
+              <p className="text-muted-foreground text-[11px] leading-relaxed">
+                This text appears in every client&apos;s order portal under &quot;How to Pay&quot;. Update it with your current UPI ID, bank account details, or any transfer instructions. Supports line breaks.
+              </p>
+              <Textarea
+                value={paymentInstructions}
+                onChange={(e) => setPaymentInstructions(e.target.value)}
+                rows={6}
+                className="text-xs resize-y font-mono"
+                placeholder="e.g. Transfer via UPI to: studio@upi&#10;Bank: State Bank of India&#10;Account: 123456789&#10;IFSC: SBIN0001234&#10;&#10;Share the UTR number in the project message thread after transferring."
+              />
+
+              {instructionsSaved && (
+                <p className={`text-[11px] ${instructionsSaved.startsWith("Saved") ? "text-emerald-600 dark:text-emerald-400" : "text-destructive"}`}>
+                  {instructionsSaved}
                 </p>
+              )}
+
+              <div className="flex justify-end">
+                <Button
+                  type="button"
+                  size="sm"
+                  onClick={handleSaveInstructions}
+                  disabled={isSavingInstructions}
+                  className="gap-1.5 text-xs font-medium"
+                >
+                  {isSavingInstructions ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      Saving…
+                    </>
+                  ) : (
+                    <>
+                      <Save className="w-3.5 h-3.5" />
+                      Save Payment Instructions
+                    </>
+                  )}
+                </Button>
               </div>
             </div>
           </CardContent>

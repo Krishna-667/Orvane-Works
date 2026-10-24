@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, FileSpreadsheet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServices, getTestimonials, getFaqs } from "@/lib/data/content";
+import { getSiteSetting } from "@/lib/data/settings";
 import { SITE_CONFIG } from "@/lib/constants/site";
 import { ContentClient } from "./content-client";
 
@@ -13,10 +14,11 @@ export const metadata = {
 };
 
 export default async function AdminContentPage() {
-  const [services, testimonials, faqs] = await Promise.all([
+  const [services, testimonials, faqs, paymentInstructions] = await Promise.all([
     getServices(),
     getTestimonials(),
     getFaqs(),
+    getSiteSetting("payment_instructions"),
   ]);
 
   return (
@@ -48,6 +50,7 @@ export default async function AdminContentPage() {
         initialServices={services}
         initialTestimonials={testimonials}
         initialFaqs={faqs}
+        initialPaymentInstructions={paymentInstructions || ""}
       />
     </div>
   );

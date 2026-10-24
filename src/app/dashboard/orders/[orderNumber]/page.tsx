@@ -34,6 +34,7 @@ import {
   getOrderFiles,
 } from "@/lib/data/orders";
 import { getOrderPaymentSummary } from "@/lib/data/payments";
+import { getSiteSetting } from "@/lib/data/settings";
 import { formatDate, formatINR, formatContactMethod } from "@/lib/utils";
 import { SITE_CONFIG } from "@/lib/constants/site";
 
@@ -57,10 +58,11 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
     notFound();
   }
 
-  const [messages, files, paymentSummary] = await Promise.all([
+  const [messages, files, paymentSummary, paymentInstructions] = await Promise.all([
     getOrderMessages(params.orderNumber, order.id),
     getOrderFiles(params.orderNumber, order.id),
     getOrderPaymentSummary(order.id, order.quote_amount_inr),
+    getSiteSetting("payment_instructions"),
   ]);
 
   const canReview = order.status === "delivered" || order.status === "closed";
@@ -195,7 +197,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
           <QuoteCard order={order} />
 
           {/* Payment Status & How to Pay */}
-          <ClientPaymentCard summary={paymentSummary} />
+          <ClientPaymentCard summary={paymentSummary} paymentInstructions={paymentInstructions} />
 
           {/* Project Details & Assigned Team Lead */}
           <Card className="border-border">

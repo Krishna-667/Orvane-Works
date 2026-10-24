@@ -461,3 +461,41 @@ export async function moderateTestimonialAction(
     return { success: false, error: err.message };
   }
 }
+
+/**
+ * Update a site_settings key-value pair (admin only).
+ * Used by the Site Settings tab to update payment instructions etc.
+ */
+export async function updateSiteSettingAction(
+  key: string,
+  value: string
+): Promise<AdminActionResult> {
+  await requireAdmin();
+  const supabase = createClient();
+
+  try {
+    const { error } = await supabase
+      .from("site_settings")
+      .upsert(
+        {
+          key,
+          value: JSON.stringify(value),
+          updated_by: (await supabase.auth.getUser()).data.user!.id,
+          updated_at: new Date().toISOString(),
+        },
+        { onConflict: "key" }
+      );
+
+    if (error) {
+      console.error("[SiteSettings] Upsert error:", error.message);
+      return { success: false, error: "Failed to update setting." };
+    }
+
+    revalidatePath("/admin/content");
+    // Revalidate all order pages so new instructions appear immediately
+    revalidatePath("/dashboard/orders/[orderNumber]", "page");
+    return { success: true, message: `"${key}" updated successfully.` };
+  } catch (err: any) {
+    return { success: false, error: err?.message || "Unexpected error." };
+  }
+}
