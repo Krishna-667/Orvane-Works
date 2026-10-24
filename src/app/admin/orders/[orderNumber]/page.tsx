@@ -31,6 +31,7 @@ import {
 } from "@/lib/data/orders";
 import { getAllEmployeesAdmin } from "@/lib/data/admin";
 import { formatDate, formatContactMethod } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 interface AdminOrderDetailPageProps {
   params: {
@@ -42,7 +43,7 @@ export async function generateMetadata({
   params,
 }: AdminOrderDetailPageProps) {
   return {
-    title: `Admin Control: ${params.orderNumber} — Orvane Admin`,
+    title: `Admin Control: ${params.orderNumber} — ${SITE_CONFIG.name} Admin`,
     description: `Administrative governance and terms for order ${params.orderNumber}.`,
   };
 }

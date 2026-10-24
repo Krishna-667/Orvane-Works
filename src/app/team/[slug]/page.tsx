@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { getTeamMembers, getTeamMemberBySlug } from "@/lib/data/team";
 import { formatDate } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 interface TeamDetailPageProps {
   params: {
@@ -56,7 +57,7 @@ export default async function TeamMemberDetailPage({ params }: TeamDetailPagePro
     jobTitle: member.designation,
     worksFor: {
       "@type": "Organization",
-      name: "Orvane Studio",
+      name: SITE_CONFIG.name,
       address: {
         "@type": "PostalAddress",
         addressLocality: "Madurai",

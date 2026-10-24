@@ -1,5 +1,6 @@
 export const SITE_CONFIG = {
-  name: "Orvane",
+  name: "Orvane Works",
+  wordmark: "ORVANE WORKS",
   tagline: "Student-founded freelance studio crafting high-impact digital experiences.",
   description:
     "Engineering-driven freelance studio in Madurai, Tamil Nadu. We specialize in modern web design & development, high-retention video editing, and brand content creation for ambitious businesses.",
@@ -10,7 +11,7 @@ export const SITE_CONFIG = {
   email: "hello@orvane.studio", // Clearly labelled contact placeholder
   phone: "+91 98765 43210",    // Clearly labelled contact placeholder
   whatsappNumber: "919876543210", // Prefilled link target
-  whatsappDefaultMessage: "Hi Orvane! I'd like to discuss a project for my business.",
+  whatsappDefaultMessage: "Hi Orvane Works! I'd like to discuss a project for my business.",
   socials: {
     instagram: "https://instagram.com/orvane.studio",
     linkedin: "https://linkedin.com/company/orvane-studio",

@@ -1,10 +1,11 @@
 import { Shield, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Privacy Policy (DPDP Draft)",
+  title: `Privacy Policy (DPDP Draft) | ${SITE_CONFIG.name}`,
   description:
-    "Privacy Policy draft for Orvane Studio, prepared in alignment with India's Digital Personal Data Protection (DPDP) Act 2023.",
+    `Privacy Policy draft for ${SITE_CONFIG.name}, prepared in alignment with India's Digital Personal Data Protection (DPDP) Act 2023.`,
 };
 
 export default function PrivacyPolicyPage() {
@@ -38,7 +39,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-2">
           <h2 className="text-base font-bold text-foreground">1. Introduction</h2>
           <p>
-            Orvane Studio (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;)
+            {SITE_CONFIG.name} (&ldquo;we&rdquo;, &ldquo;us&rdquo;, or &ldquo;our&rdquo;)
             is a freelance digital engineering studio founded by students in
             Madurai, Tamil Nadu. We respect the privacy of every client, visitor,
             and applicant, and we process personal data in accordance with the
@@ -131,9 +132,9 @@ export default function PrivacyPolicyPage() {
             our Data Protection Lead:
           </p>
           <p className="font-semibold text-foreground">
-            Orvane Studio • Data Protection Lead
+            {SITE_CONFIG.name} • Data Protection Lead
             <br />
-            Email: hello@orvane.studio
+            Email: {SITE_CONFIG.email}
             <br />
             Madurai, Tamil Nadu 625020, India
           </p>

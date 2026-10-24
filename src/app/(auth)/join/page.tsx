@@ -28,6 +28,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { applyToJoinTeamAction } from "@/app/actions/auth";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 const AVAILABLE_SKILLS = [
   "Web Development (Next.js / TypeScript)",
@@ -107,7 +108,7 @@ export default function JoinTeamPage() {
             Student Creator Portal
           </Badge>
           <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
-            Join the Orvane Engineering Studio
+            Join the {SITE_CONFIG.name} Studio
           </h1>
           <p className="text-sm text-muted-foreground max-w-lg mx-auto">
             We are engineering students in Madurai building real-world client
@@ -322,7 +323,7 @@ export default function JoinTeamPage() {
                   id="coverNote"
                   required
                   rows={4}
-                  placeholder="Tell us about your engineering degree/year in Madurai or Tamil Nadu, your key tools, and why you want to take on client projects with Orvane."
+                  placeholder={`Tell us about your engineering degree/year in Madurai or Tamil Nadu, your key tools, and why you want to take on client projects with ${SITE_CONFIG.name}.`}
                   value={coverNote}
                   onChange={(e) => setCoverNote(e.target.value)}
                   disabled={isLoading}

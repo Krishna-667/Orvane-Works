@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Inbox } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAdminInbox } from "@/lib/data/admin";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { InboxClient } from "./inbox-client";
 
 export const metadata = {
-  title: "Studio Inbox — Orvane Admin",
+  title: `Studio Inbox — ${SITE_CONFIG.name} Admin`,
   description: "Manage incoming contact inquiries and hardware pilot waitlist registrations.",
 };
 

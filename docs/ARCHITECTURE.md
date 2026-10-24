@@ -1,13 +1,13 @@
-# Orvane System Architecture & Technical Specification
+# Orvane Works System Architecture & Technical Specification
 
-> **Engineering Reference Document for Orvane Studio**  
+> **Engineering Reference Document for Orvane Works Studio**  
 > *Next.js 14 App Router • TypeScript • Supabase Postgres • Tailwind CSS • Playwright*
 
 ---
 
 ## 1. High-Level Architecture Overview
 
-Orvane is architected as an engineering-grade, database-driven digital studio platform. It unites a public-facing conversion studio with a multi-tenant client portal, a student employee workspace, and an executive admin governance deck.
+Orvane Works is architected as an engineering-grade, database-driven digital studio platform. It unites a public-facing conversion studio with a multi-tenant client portal, a student employee workspace, and an executive admin governance deck.
 
 ```mermaid
 flowchart TD

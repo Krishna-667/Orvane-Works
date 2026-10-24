@@ -1,4 +1,4 @@
-# Orvane — Engineering-First Digital Studio Platform
+# Orvane Works — Engineering-First Digital Studio Platform
 
 [![Next.js](https://img.shields.io/badge/Next.js-14.2-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
@@ -8,7 +8,7 @@
 [![Vitest](https://img.shields.io/badge/Vitest-Unit_Tested-yellow?logo=vitest)](https://vitest.dev/)
 [![Compliance](https://img.shields.io/badge/DPDP_Act_2023-Ready-success)](#-india-dpdp-act-2023-compliance)
 
-> **Orvane** is a production-ready, full-stack digital agency web application crafted for a student-founded freelance engineering studio based in **Madurai, Tamil Nadu, India**.
+> **Orvane Works** is a production-ready, full-stack digital agency web application crafted for a student-founded freelance engineering studio based in **Madurai, Tamil Nadu, India**.
 >
 > It pairs an accessible, high-performance public marketing website with a multi-tenant client portal, a student employee workspace, and an executive administrative governance deck.
 
@@ -219,7 +219,7 @@ Orvane incorporates privacy-by-design under India's Digital Personal Data Protec
 
 ## 👥 Studio Credits & Location
 
-- **Studio**: Orvane Digital Studio
+- **Studio**: Orvane Works Digital Studio
 - **Origin**: Madurai, Tamil Nadu, India
 - **Founders**: Engineering Students passionate about software craftsmanship, film pacing, and hardware prototyping.
 - **License**: Private & Proprietary. All rights reserved.

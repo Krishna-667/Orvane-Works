@@ -1,6 +1,6 @@
 export const en = {
   common: {
-    brandName: "Orvane",
+    brandName: "Orvane Works",
     tagline: "Student-founded freelance studio in Madurai",
     startProject: "Start a project",
     viewWork: "Explore our work",
@@ -109,7 +109,7 @@ export const en = {
   },
   team: {
     title: "Meet the Studio",
-    subtitle: "The engineering students and digital specialists driving Orvane.",
+    subtitle: "The engineering students and digital specialists driving Orvane Works.",
     requestMember: "Request {name} for your project",
     available: "Available for projects",
     busy: "Partially booked",
@@ -118,7 +118,7 @@ export const en = {
   auth: {
     loginTitle: "Welcome Back",
     signupTitle: "Create Client Account",
-    joinTitle: "Apply to Join Orvane",
+    joinTitle: "Apply to Join Orvane Works",
     awaitingApprovalTitle: "Application Submitted",
     awaitingApprovalMessage:
       "Your team application has been received and is awaiting administrator review. You will receive an email as soon as an admin approves or updates your status.",

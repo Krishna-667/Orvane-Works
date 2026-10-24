@@ -43,7 +43,7 @@ interface OrderDetailPageProps {
 
 export async function generateMetadata({ params }: OrderDetailPageProps) {
   return {
-    title: `Order ${params.orderNumber} — Orvane Client Portal`,
+    title: `Order ${params.orderNumber} — ${SITE_CONFIG.name} Client Portal`,
     description: `Track milestones, deliverables, and communication for order ${params.orderNumber}.`,
   };
 }
@@ -87,7 +87,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
 
           <a
             href={`https://wa.me/${SITE_CONFIG.whatsappNumber}?text=${encodeURIComponent(
-              `Hi Orvane, regarding my order ${order.order_number}: `
+              `Hi ${SITE_CONFIG.name}, regarding my order ${order.order_number}: `
             )}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -236,7 +236,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
           <div className="p-4 rounded-lg bg-vermilion/5 border border-vermilion/20 space-y-2">
             <h4 className="font-semibold text-xs text-foreground flex items-center gap-1.5">
               <CheckCircle2 className="w-4 h-4 text-vermilion" />
-              The Orvane Engineering Promise
+              The {SITE_CONFIG.name} Engineering Promise
             </h4>
             <p className="text-[11px] text-muted-foreground leading-relaxed">
               Every deliverable is code-reviewed, tested at 360px mobile width, and checked for WCAG 2.2 AA accessibility before being marked complete.

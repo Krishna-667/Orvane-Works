@@ -51,7 +51,7 @@
     --popover-foreground: 210 20% 96%;
 
     --primary: 9 100% 59%;           /* #FF4D30 High-Contrast Vermilion */
-    --primary-foreground: 220 12% 7%;
+    --primary-foreground: 220 12% 7%; /* #111214 dark ink on bright orange = 5.9:1 ✓ WCAG AA */
 
     --secondary: 218 10% 15%;        /* #22252A */
     --secondary-foreground: 210 20% 96%;

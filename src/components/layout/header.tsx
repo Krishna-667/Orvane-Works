@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -26,11 +27,28 @@ export function Header() {
         {/* Brand Logo */}
         <Link
           href="/"
-          className="flex items-center gap-2 font-display text-2xl font-bold tracking-tight text-foreground transition-opacity hover:opacity-90"
+          className="flex items-center gap-2 transition-opacity hover:opacity-90 shrink-0"
+          aria-label={`${SITE_CONFIG.name} – Home`}
         >
-          <span className="flex items-center">
-            ORVANE
-            <span className="inline-block w-2 h-2 rounded-full bg-primary ml-1" />
+          <Image
+            src="/brand/logo-icon.png"
+            alt=""
+            width={32}
+            height={32}
+            className="h-8 w-8 object-contain"
+            priority
+          />
+          <Image
+            src="/brand/logo-wordmark.png"
+            alt={SITE_CONFIG.name}
+            width={120}
+            height={36}
+            className="h-8 w-auto object-contain hidden sm:block dark:invert"
+            priority
+          />
+          {/* Fallback text for tiny screens */}
+          <span className="sm:hidden font-display text-lg font-bold tracking-tight text-foreground leading-none">
+            ORVANE<span className="text-primary">.</span>
           </span>
         </Link>
 
@@ -95,9 +113,21 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[350px] p-6">
               <SheetHeader className="text-left mb-6">
-                <SheetTitle className="font-display text-2xl font-bold flex items-center">
-                  ORVANE
-                  <span className="inline-block w-2 h-2 rounded-full bg-primary ml-1" />
+                <SheetTitle className="font-display text-2xl font-bold flex items-center gap-2">
+                  <Image
+                    src="/brand/logo-icon.png"
+                    alt=""
+                    width={28}
+                    height={28}
+                    className="h-7 w-7 object-contain"
+                  />
+                  <Image
+                    src="/brand/logo-wordmark.png"
+                    alt={SITE_CONFIG.name}
+                    width={110}
+                    height={32}
+                    className="h-7 w-auto object-contain dark:invert"
+                  />
                 </SheetTitle>
               </SheetHeader>
 

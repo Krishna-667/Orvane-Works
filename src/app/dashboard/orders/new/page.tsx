@@ -4,12 +4,13 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServices, getPackages } from "@/lib/data/content";
 import { getTeamMembers } from "@/lib/data/team";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { OrderForm } from "./order-form";
 
 export const metadata = {
-  title: "New Project Request — Orvane Client Portal",
+  title: `New Project Request — ${SITE_CONFIG.name} Client Portal`,
   description:
-    "Submit a new web development, video editing, or content design brief to Orvane Studio.",
+    `Submit a new web development, video editing, or content design brief to ${SITE_CONFIG.name}.`,
 };
 
 export default async function NewOrderPage() {

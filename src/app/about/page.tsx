@@ -3,11 +3,12 @@ import { ArrowRight, Code2, Cpu, MapPin, Users, HeartHandshake, ShieldCheck } fr
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "About the Studio",
+  title: `About the Studio | ${SITE_CONFIG.name}`,
   description:
-    "The story of Orvane: a student-founded freelance digital studio in Madurai, Tamil Nadu, India.",
+    `The story of ${SITE_CONFIG.name}: a student-founded freelance digital studio in Madurai, Tamil Nadu, India.`,
 };
 
 export default function AboutPage() {
@@ -20,7 +21,7 @@ export default function AboutPage() {
           Student engineers with professional precision.
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
-          Orvane was founded in Madurai by engineering students who saw small
+          {SITE_CONFIG.name} was founded in Madurai by engineering students who saw small
           businesses and growing clinics struggling with bloated agency fees and
           broken templates. We decided to build a studio driven by clean code,
           honest pricing in INR (₹), and genuine local partnership.
@@ -86,7 +87,7 @@ export default function AboutPage() {
           <p>
             As engineering students, we spend our days studying systems
             architecture, modern frameworks, and design tokens. When you hire
-            Orvane, you get hungry, skilled developers and creators who treat
+            {SITE_CONFIG.name}, you get hungry, skilled developers and creators who treat
             your project with craft and personal accountability.
           </p>
         </div>

@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
 import { getServices, getServiceBySlug, getPackagesByService } from "@/lib/data/content";
 import { formatINR } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 interface ServicePageProps {
   params: {
@@ -140,7 +141,7 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       {/* Why Orvane Section */}
       <div className="rounded-2xl border border-border bg-card p-8 md:p-12 space-y-6">
         <h3 className="font-display text-2xl font-bold">
-          Why work with Orvane for {service.title}?
+          Why work with {SITE_CONFIG.name} for {service.title}?
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
           <div className="space-y-2">

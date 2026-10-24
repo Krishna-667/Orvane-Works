@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import {
   Instagram,
   Linkedin,
@@ -23,10 +24,23 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 font-display text-2xl font-bold tracking-tight text-foreground"
+              className="inline-flex items-center gap-2 transition-opacity hover:opacity-80"
+              aria-label={`${SITE_CONFIG.name} – Home`}
             >
-              ORVANE
-              <span className="w-2 h-2 rounded-full bg-primary" />
+              <Image
+                src="/brand/logo-icon.png"
+                alt=""
+                width={28}
+                height={28}
+                className="h-7 w-7 object-contain"
+              />
+              <Image
+                src="/brand/logo-wordmark.png"
+                alt={SITE_CONFIG.name}
+                width={110}
+                height={32}
+                className="h-7 w-auto object-contain dark:invert"
+              />
             </Link>
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               A freelance digital studio run by engineering students in
@@ -212,7 +226,7 @@ export function Footer() {
         {/* Bottom Legal & DPDP Notice */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <p>
-            © {currentYear} Orvane Studio. Built with pride by engineering
+            © {currentYear} {SITE_CONFIG.name}. Built with pride by engineering
             students in Madurai.
           </p>
           <div className="flex flex-wrap items-center gap-4">

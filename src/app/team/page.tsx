@@ -12,11 +12,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getTeamMembers } from "@/lib/data/team";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Meet the Team",
+  title: `Meet the Team | ${SITE_CONFIG.name}`,
   description:
-    "The engineering students and creative specialists behind Orvane Studio in Madurai, Tamil Nadu.",
+    `The engineering students and creative specialists behind ${SITE_CONFIG.name} in Madurai, Tamil Nadu.`,
 };
 
 export const revalidate = 60;
@@ -140,7 +141,7 @@ export default async function TeamPage() {
         </p>
         <Link href="/join">
           <Button size="lg" variant="outline" className="gap-2 font-semibold">
-            Apply to Join Orvane
+            Apply to Join {SITE_CONFIG.name}
             <ArrowUpRight className="w-4 h-4" />
           </Button>
         </Link>

@@ -22,6 +22,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import {
   Card,
   CardContent,
@@ -79,7 +80,7 @@ export default function EmployeeProfileEditorPage() {
     {
       id: "exp-1",
       role: "Lead Full-Stack Engineer",
-      organization: "Orvane Studio",
+      organization: SITE_CONFIG.name,
       start_date: "2024-01-01",
       end_date: null,
       is_current: true,

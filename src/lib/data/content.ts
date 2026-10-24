@@ -257,7 +257,7 @@ export const DEFAULT_TESTIMONIALS: TestimonialItem[] = [
     client_role_company: "Managing Director, Meenakshi Sweets [Demo]",
     rating: 5,
     content:
-      "Orvane's student team delivered faster and with significantly cleaner code than traditional agencies. Our customers in Madurai love the WhatsApp ordering flow.",
+      "Orvane Works' student team delivered faster and with significantly cleaner code than traditional agencies. Our customers in Madurai love the WhatsApp ordering flow.",
     is_featured: true,
   },
   {
@@ -284,7 +284,7 @@ export const DEFAULT_FAQS: FaqItem[] = [
   {
     id: "60000000-0000-0000-0000-000000000001",
     category: "General",
-    question: "Who works on my project at Orvane?",
+    question: "Who works on my project at Orvane Works?",
     answer:
       "Your project is built directly by vetted engineering students and specialists in Madurai. An experienced student lead supervises quality and delivery, giving you top-tier craft without corporate markup.",
     display_order: 1,

@@ -1,13 +1,13 @@
-# Orvane Studio — Administrator Content & Operations Guide
+# Orvane Works — Administrator Content & Operations Guide
 
 > **Official Operating Manual for Studio Administrators and Managing Leads**  
-> *Orvane Digital Studio — Madurai, Tamil Nadu, India*
+> *Orvane Works Digital Studio — Madurai, Tamil Nadu, India*
 
 ---
 
 ## 1. Introduction & Philosophy
 
-Orvane is an engineering-first freelance digital studio founded and operated by engineering students in Madurai, Tamil Nadu. We specialize in high-conversion web development (Next.js, Supabase), paced short-form video editing & reels, strategic brand design assets, and student hardware/IoT prototyping.
+Orvane Works is an engineering-first freelance digital studio founded and operated by engineering students in Madurai, Tamil Nadu. We specialize in high-conversion web development (Next.js, Supabase), paced short-form video editing & reels, strategic brand design assets, and student hardware/IoT prototyping.
 
 ### Core Editorial & Studio Standards
 1. **Never Invent Facts**: Never fabricate client names, awards, pricing, or past project metrics. All placeholder or demo records must be explicitly marked with the `[Demo]` tag.

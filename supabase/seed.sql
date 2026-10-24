@@ -1,4 +1,4 @@
--- Orvane Studio Database Seed Script
+-- Orvane Works Database Seed Script
 -- Realistic demo data clearly labelled as demo
 
 -- Seed Services
@@ -106,8 +106,8 @@ values
   (
     '30000000-0000-0000-0000-000000000001',
     'General',
-    'Who is behind Orvane?',
-    'Orvane is founded and operated by engineering students based in Madurai, Tamil Nadu. We combine academic engineering discipline with modern, production-grade digital design and development.',
+    'Who is behind Orvane Works?',
+    'Orvane Works is founded and operated by engineering students based in Madurai, Tamil Nadu. We combine academic engineering discipline with modern, production-grade digital design and development.',
     1,
     true
   ),

@@ -21,6 +21,7 @@ import {
 } from "@/components/ui/card";
 import { acceptQuoteAction } from "@/app/actions/orders";
 import { formatINR } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import type { Order } from "@/lib/data/orders";
 
 interface QuoteCardProps {
@@ -110,7 +111,7 @@ export function QuoteCard({ order }: QuoteCardProps) {
                     Accept this quote to begin engineering
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    By accepting, you authorize the Orvane student team to commence project setup and milestone scheduling.
+                    By accepting, you authorize the {SITE_CONFIG.name} student team to commence project setup and milestone scheduling.
                   </p>
                 </div>
                 <Button

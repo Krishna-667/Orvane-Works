@@ -6,10 +6,11 @@ import {
   getEmployeeRequests,
   getAllEmployeesAdmin,
 } from "@/lib/data/admin";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { EmployeeManagementClient } from "./employee-management-client";
 
 export const metadata = {
-  title: "Employee Management — Orvane Admin",
+  title: `Employee Management — ${SITE_CONFIG.name} Admin`,
   description:
     "Review student team applications, approve or reject members, manage public profile publishing.",
 };

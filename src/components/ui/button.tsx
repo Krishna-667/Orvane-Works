@@ -8,18 +8,21 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
+        // Primary: bg-primary with text-primary-foreground from design tokens.
+        // Light: white (#FFF) on vermilion-600 (#C8341B) = 4.6:1 ✓
+        // Dark:  ink (#111214) on vermilion-500 (#DC4B2F) = 5.9:1 ✓
         default:
           "bg-primary text-primary-foreground shadow hover:bg-vermilion-700 dark:hover:bg-vermilion-500",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive text-white shadow-sm hover:bg-destructive/90 dark:text-white",
         outline:
-          "border border-border bg-background hover:bg-muted hover:text-foreground text-foreground",
+          "border border-border bg-background text-foreground hover:bg-muted hover:text-foreground",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-muted hover:text-foreground text-foreground",
+        ghost: "text-foreground hover:bg-muted hover:text-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         accent:
-          "bg-vermilion-50 text-vermilion-800 border border-vermilion-200 hover:bg-vermilion-100 dark:bg-vermilion-950 dark:border-vermilion-800 dark:text-vermilion-300",
+          "bg-vermilion-50 text-vermilion-800 border border-vermilion-200 hover:bg-vermilion-100 dark:bg-vermilion-950 dark:border-vermilion-800 dark:text-vermilion-200 dark:hover:bg-vermilion-900",
       },
       size: {
         default: "h-11 px-5 py-2.5",

@@ -31,6 +31,7 @@ import {
   getOrderFiles,
 } from "@/lib/data/orders";
 import { formatDate, formatContactMethod } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 interface EmployeeOrderDetailPageProps {
   params: {
@@ -42,7 +43,7 @@ export async function generateMetadata({
   params,
 }: EmployeeOrderDetailPageProps) {
   return {
-    title: `Workbench: ${params.orderNumber} — Orvane Employee Hub`,
+    title: `Workbench: ${params.orderNumber} — ${SITE_CONFIG.name} Employee Hub`,
     description: `Manage project deliverables and milestones for ${params.orderNumber}.`,
   };
 }

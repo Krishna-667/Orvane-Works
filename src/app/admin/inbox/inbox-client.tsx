@@ -18,6 +18,7 @@ import {
   toggleWaitlistHandledAction,
 } from "@/app/actions/admin";
 import { formatDate } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import type { ContactMessageItem, WaitlistEntryItem } from "@/lib/data/admin";
 
 interface InboxClientProps {
@@ -195,7 +196,7 @@ export function InboxClient({
               Hardware &amp; IoT Pilot Interest
             </CardTitle>
             <CardDescription className="text-xs">
-              Registrations from ambitious clients interested in Orvane&apos;s upcoming hardware and IoT division.
+              Registrations from ambitious clients interested in {SITE_CONFIG.name}&apos;s upcoming hardware and IoT division.
             </CardDescription>
           </CardHeader>
 

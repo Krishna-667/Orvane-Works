@@ -1,10 +1,11 @@
 import { FileCheck2, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Terms of Service (Draft)",
+  title: `Terms of Service (Draft) | ${SITE_CONFIG.name}`,
   description:
-    "Client terms and conditions of service for Orvane Studio. Marked draft, needs lawyer review.",
+    `Client terms and conditions of service for ${SITE_CONFIG.name}. Marked draft, needs lawyer review.`,
 };
 
 export default function TermsPage() {
@@ -18,7 +19,7 @@ export default function TermsPage() {
             Legal Status: Draft, Needs Lawyer Review
           </strong>
           These terms govern the commissioning and delivery of freelance
-          services provided by Orvane Studio in Madurai, Tamil Nadu, India.
+          services provided by {SITE_CONFIG.name} in Madurai, Tamil Nadu, India.
         </div>
       </div>
 
@@ -38,7 +39,7 @@ export default function TermsPage() {
             1. Services & Commissioning
           </h2>
           <p>
-            Orvane Studio provides freelance digital design, full-stack web
+            {SITE_CONFIG.name} provides freelance digital design, full-stack web
             development, video editing, and brand asset production. All work is
             initiated via an agreed project brief and formal quote issued in Indian
             Rupees (₹).
@@ -52,7 +53,7 @@ export default function TermsPage() {
           <p>
             Upon full settlement of the agreed quote amount, all custom code,
             compiled assets, and design files produced specifically for the client
-            are assigned to the client. Orvane retains the right to display the
+            are assigned to the client. {SITE_CONFIG.name} retains the right to display the
             delivered work in its public portfolio and case studies.
           </p>
         </section>

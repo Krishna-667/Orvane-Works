@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { signInAction } from "@/app/actions/auth";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 function LoginForm() {
   const router = useRouter();
@@ -63,7 +64,7 @@ function LoginForm() {
           <Lock className="w-5 h-5" />
         </div>
         <CardTitle className="font-display text-2xl font-bold tracking-tight">
-          Sign In to Orvane
+          Sign In to {SITE_CONFIG.name}
         </CardTitle>
         <CardDescription className="text-sm text-muted-foreground">
           Access your client project portal, employee hub, or admin dashboard.

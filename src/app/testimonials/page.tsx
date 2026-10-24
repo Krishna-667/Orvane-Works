@@ -2,11 +2,12 @@ import { Star, MessageSquare } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { getTestimonials } from "@/lib/data/content";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Client Testimonials & Reviews",
+  title: `Client Testimonials & Reviews | ${SITE_CONFIG.name}`,
   description:
-    "Honest client reviews from businesses and startups across Madurai and Tamil Nadu who work with Orvane.",
+    `Honest client reviews from businesses and startups across Madurai and Tamil Nadu who work with ${SITE_CONFIG.name}.`,
 };
 
 export const revalidate = 60;

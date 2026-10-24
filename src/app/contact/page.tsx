@@ -59,7 +59,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="container py-12 md:py-16 space-y-16">
+    <div className="container pt-12 md:pt-16 pb-16 space-y-8">
       {/* Header */}
       <div className="max-w-3xl space-y-3">
         <Badge variant="accent">Get in Touch</Badge>

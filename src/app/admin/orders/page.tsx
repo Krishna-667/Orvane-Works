@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, FolderKanban } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAllOrdersAdmin } from "@/lib/data/admin";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { OrdersClient } from "./orders-client";
 
 export const metadata = {
-  title: "Global Orders Management — Orvane Admin",
+  title: `Global Orders Management — ${SITE_CONFIG.name} Admin`,
   description:
     "Filter orders by status, assign student engineering leads, issue quotes, and update payment terms.",
 };

@@ -54,7 +54,7 @@ export const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
       {
         id: "exp-1",
         role: "Lead Full-Stack Engineer",
-        organization: "Orvane Studio",
+        organization: "Orvane Works",
         start_date: "2024-01-01",
         end_date: null,
         is_current: true,
@@ -102,7 +102,7 @@ export const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
       {
         id: "exp-3",
         role: "Motion Designer & Video Lead",
-        organization: "Orvane Studio",
+        organization: "Orvane Works",
         start_date: "2024-02-01",
         end_date: null,
         is_current: true,
@@ -139,7 +139,7 @@ export const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
     name: "Siddharth Muthu",
     avatar_url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&auto=format&fit=crop&q=80",
     designation: "Brand Strategist & UI/UX Specialist",
-    bio: "Mechanical engineering student with deep passion for digital typography, design systems, and visual branding. Creator of Orvane's cream and vermilion design token architecture.",
+    bio: "Mechanical engineering student with deep passion for digital typography, design systems, and visual branding. Creator of Orvane Works' cream and vermilion design token architecture.",
     availability_status: "busy",
     is_featured: true,
     display_order: 3,
@@ -149,7 +149,7 @@ export const DEFAULT_TEAM_MEMBERS: TeamMember[] = [
       {
         id: "exp-5",
         role: "Brand & UI Designer",
-        organization: "Orvane Studio",
+        organization: "Orvane Works",
         start_date: "2024-03-01",
         end_date: null,
         is_current: true,
@@ -183,7 +183,7 @@ export async function getTeamMembers(): Promise<TeamMember[]> {
       // Map Supabase rows to TeamMember type
       return data.map((d: any) => ({
         ...d,
-        name: d.profiles?.full_name || "Orvane Specialist",
+        name: d.profiles?.full_name || "Orvane Works Specialist",
         avatar_url: d.profiles?.avatar_url || DEFAULT_TEAM_MEMBERS[0].avatar_url,
         specializations: DEFAULT_TEAM_MEMBERS[0].specializations,
         experience: DEFAULT_TEAM_MEMBERS[0].experience,

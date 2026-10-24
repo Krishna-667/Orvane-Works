@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { postOrderMessageAction } from "@/app/actions/orders";
 import { formatDate } from "@/lib/utils";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import type { OrderMessage } from "@/lib/data/orders";
 
 interface MessageThreadProps {
@@ -113,7 +114,7 @@ export function MessageThread({
                       variant={isClient ? "outline" : "secondary"}
                       className="text-[9px] h-4 px-1"
                     >
-                      {isClient ? "Client" : "Orvane Studio"}
+                      {isClient ? "Client" : SITE_CONFIG.name}
                     </Badge>
                     <span>• {formatDate(msg.created_at)}</span>
                   </div>

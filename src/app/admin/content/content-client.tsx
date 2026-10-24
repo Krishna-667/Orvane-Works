@@ -121,7 +121,7 @@ export function ContentClient({
               Client Testimonials Moderation Deck
             </CardTitle>
             <CardDescription className="text-xs">
-              Reviews submitted by clients upon order completion. Moderated reviews appear publicly on the Orvane homepage and /testimonials.
+              Reviews submitted by clients upon order completion. Moderated reviews appear publicly on the {SITE_CONFIG.name} homepage and /testimonials.
             </CardDescription>
           </CardHeader>
 

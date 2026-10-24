@@ -10,8 +10,8 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 export const metadata: Metadata = {
   metadataBase: new URL("https://orvane.studio"),
   title: {
-    default: "Orvane | Student-Founded Freelance Studio in Madurai",
-    template: "%s | Orvane Studio",
+    default: `${SITE_CONFIG.name} | Student-Founded Freelance Studio in Madurai`,
+    template: `%s | ${SITE_CONFIG.name}`,
   },
   description: SITE_CONFIG.description,
   keywords: [
@@ -22,19 +22,19 @@ export const metadata: Metadata = {
     "student engineering studio",
     "Next.js web agency",
   ],
-  authors: [{ name: "Orvane Studio", url: "https://orvane.studio" }],
-  creator: "Orvane Studio",
+  authors: [{ name: SITE_CONFIG.name, url: "https://orvane.studio" }],
+  creator: SITE_CONFIG.name,
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://orvane.studio",
-    title: "Orvane | Student-Founded Freelance Studio in Madurai",
+    title: `${SITE_CONFIG.name} | Student-Founded Freelance Studio in Madurai`,
     description: SITE_CONFIG.description,
-    siteName: "Orvane Studio",
+    siteName: SITE_CONFIG.name,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Orvane | Student-Founded Freelance Studio in Madurai",
+    title: `${SITE_CONFIG.name} | Student-Founded Freelance Studio in Madurai`,
     description: SITE_CONFIG.description,
   },
   robots: {
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  name: "Orvane",
+  name: SITE_CONFIG.name,
   image: "https://orvane.studio/og-image.png",
   description: SITE_CONFIG.description,
   url: "https://orvane.studio",

@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { signOutAction } from "@/app/actions/auth";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export default function AwaitingApprovalPage() {
   const [isSigningOut, setIsSigningOut] = React.useState(false);
@@ -38,7 +39,7 @@ export default function AwaitingApprovalPage() {
             Application Received
           </CardTitle>
           <CardDescription className="text-sm text-muted-foreground leading-relaxed max-w-md mx-auto">
-            Thank you for applying to join the Orvane freelance studio. Your
+            Thank you for applying to join the {SITE_CONFIG.name} freelance studio. Your
             account has been created in least-privilege review mode.
           </CardDescription>
         </CardHeader>

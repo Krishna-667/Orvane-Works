@@ -3,11 +3,11 @@ import { SITE_CONFIG } from "@/lib/constants/site";
 
 const resendApiKey = process.env.RESEND_API_KEY;
 const resend = resendApiKey ? new Resend(resendApiKey) : null;
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || "Orvane Studio <notifications@orvane.studio>";
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || `${SITE_CONFIG.name} <notifications@orvane.studio>`;
 const COMPANY_INBOX = process.env.COMPANY_INBOX || SITE_CONFIG.email;
 
 /**
- * Base email layout wrapper with Orvane brand styling
+ * Base email layout wrapper with Orvane Works brand styling
  */
 function wrapEmailHtml(title: string, bodyContent: string): string {
   return `
@@ -94,14 +94,14 @@ function wrapEmailHtml(title: string, bodyContent: string): string {
 <body>
   <div class="wrapper">
     <div class="header">
-      <h1 class="logo-text">ORVANE</h1>
+      <h1 class="logo-text">${SITE_CONFIG.wordmark}</h1>
       <p class="logo-sub">Student-Founded Freelance Studio • Madurai, Tamil Nadu</p>
     </div>
     <div class="content">
       ${bodyContent}
     </div>
     <div class="footer">
-      <p style="margin: 0 0 4px 0;"><strong>Orvane Studio</strong> • Madurai, Tamil Nadu, India</p>
+      <p style="margin: 0 0 4px 0;"><strong>${SITE_CONFIG.name}</strong> • Madurai, Tamil Nadu, India</p>
       <p style="margin: 0;">Need help? Email <a href="mailto:${SITE_CONFIG.email}" style="color: #C8341B;">${SITE_CONFIG.email}</a> or WhatsApp <a href="https://wa.me/${SITE_CONFIG.whatsappNumber}" style="color: #C8341B;">+91 ${SITE_CONFIG.whatsappNumber.slice(2)}</a></p>
     </div>
   </div>
@@ -156,16 +156,16 @@ export async function sendContactConfirmationEmail({
     "We received your message",
     `
     <div class="badge">Message Received</div>
-    <h2 class="heading">Vanakkam ${name}, thank you for reaching out to Orvane.</h2>
+    <h2 class="heading">Vanakkam ${name}, thank you for reaching out to ${SITE_CONFIG.name}.</h2>
     <p>We have safely received your inquiry. One of our student founders in Madurai will review your brief and reply within 24 hours.</p>
     <p>If your project is time-sensitive or you prefer WhatsApp, you can also reach us directly at <a href="https://wa.me/${SITE_CONFIG.whatsappNumber}" style="color: #C8341B; font-weight: 600;">+91 ${SITE_CONFIG.whatsappNumber.slice(2)}</a>.</p>
-    <p>Warm regards,<br><strong>The Orvane Team</strong></p>
+    <p>Warm regards,<br><strong>The ${SITE_CONFIG.name} Team</strong></p>
     `
   );
 
   return sendEmail({
     to: email,
-    subject: "Vanakkam! We received your message — Orvane",
+    subject: `Vanakkam! We received your message — ${SITE_CONFIG.name}`,
     html,
   });
 }
@@ -228,7 +228,7 @@ export async function sendOrderReceivedEmail({
     `
     <div class="badge">Order Submitted • ${orderNumber}</div>
     <h2 class="heading">Vanakkam ${clientName}, your order has been registered!</h2>
-    <p>Thank you for trusting Orvane with your project: <strong>${serviceTitle}</strong>.</p>
+    <p>Thank you for trusting ${SITE_CONFIG.name} with your project: <strong>${serviceTitle}</strong>.</p>
     <p>Our engineering leads are now reviewing your brief, budget requirements, and project scope. You will receive an official quote and timeline breakdown in your client portal shortly.</p>
     <a href="${appUrl}/dashboard/orders/${orderNumber}" class="btn">View Order Details &amp; Timeline</a>
     <p style="font-size: 13px; color: #6B7280;">Order reference number: <strong>${orderNumber}</strong></p>
@@ -237,7 +237,7 @@ export async function sendOrderReceivedEmail({
 
   return sendEmail({
     to: clientEmail,
-    subject: `Order Confirmed: ${orderNumber} — Orvane`,
+    subject: `Order Confirmed: ${orderNumber} — ${SITE_CONFIG.name}`,
     html,
   });
 }
@@ -281,7 +281,7 @@ export async function sendOrderStatusUpdatedEmail({
 
   return sendEmail({
     to: clientEmail,
-    subject: `[${orderNumber}] Status updated to "${statusLabel}" — Orvane`,
+    subject: `[${orderNumber}] Status updated to "${statusLabel}" — ${SITE_CONFIG.name}`,
     html,
   });
 }
@@ -306,15 +306,15 @@ export async function sendEmployeeDecisionEmail({
   const body = isApproved
     ? `
       <div class="badge" style="background: #E8F5E9; color: #1E7E34;">Welcome to the Team</div>
-      <h2 class="heading">Congratulations ${applicantName}! Your Orvane application was approved.</h2>
+      <h2 class="heading">Congratulations ${applicantName}! Your ${SITE_CONFIG.name} application was approved.</h2>
       <p>The student founders have verified your application. Your employee account is now fully active.</p>
       <p>You can now log in to the employee dashboard, configure your public team profile (specializations, bio, and experience), and receive client order assignments.</p>
       <a href="${appUrl}/employee" class="btn">Open Employee Dashboard</a>
     `
     : `
       <div class="badge" style="background: #FEE2E2; color: #DC2626;">Application Update</div>
-      <h2 class="heading">Dear ${applicantName}, update regarding your Orvane application</h2>
-      <p>Thank you for taking the time to apply to join Orvane Studio. After reviewing current project capacities and domain requirements, we are unable to bring you onto the active team at this time.</p>
+      <h2 class="heading">Dear ${applicantName}, update regarding your ${SITE_CONFIG.name} application</h2>
+      <p>Thank you for taking the time to apply to join ${SITE_CONFIG.name}. After reviewing current project capacities and domain requirements, we are unable to bring you onto the active team at this time.</p>
       ${
         reason
           ? `<div style="background: #F9F8F6; padding: 16px; border-left: 3px solid #6B7280; margin: 16px 0;">
@@ -326,15 +326,15 @@ export async function sendEmployeeDecisionEmail({
     `;
 
   const html = wrapEmailHtml(
-    isApproved ? "Welcome to Orvane Team" : "Orvane Application Status",
+    isApproved ? `Welcome to ${SITE_CONFIG.name} Team` : `${SITE_CONFIG.name} Application Status`,
     body
   );
 
   return sendEmail({
     to: applicantEmail,
     subject: isApproved
-      ? "Welcome to Orvane Studio! Application Approved 🎉"
-      : "Update on your Orvane Team Application",
+      ? `Welcome to ${SITE_CONFIG.name}! Application Approved 🎉`
+      : `Update on your ${SITE_CONFIG.name} Team Application`,
     html,
   });
 }

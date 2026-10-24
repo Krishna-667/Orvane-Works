@@ -74,7 +74,7 @@ export const DEMO_EMPLOYEE_REQUESTS: EmployeeRequestItem[] = [
     resume_url: "https://drive.google.com/dinesh-cv.pdf",
     skills: ["React", "Next.js", "Tailwind CSS", "TypeScript", "Node.js"],
     cover_note:
-      "3rd-year ECE student at Thiagarajar College of Engineering, Madurai. Built 2 freelance landing pages and contributed to open source React projects. Excited to join Orvane's web engineering division.",
+      "3rd-year ECE student at Thiagarajar College of Engineering, Madurai. Built 2 freelance landing pages and contributed to open source React projects. Excited to join Orvane Works' web engineering division.",
     status: "pending",
     created_at: "2026-10-22T14:30:00Z",
   },

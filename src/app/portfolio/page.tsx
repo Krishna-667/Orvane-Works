@@ -11,11 +11,12 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { getPortfolioProjects, getServices } from "@/lib/data/content";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Case Studies & Work",
+  title: `Case Studies & Work | ${SITE_CONFIG.name}`,
   description:
-    "Explore digital products and cinematic videos engineered by student specialists at Orvane in Madurai.",
+    `Explore digital products and cinematic videos engineered by student specialists at ${SITE_CONFIG.name} in Madurai.`,
 };
 
 export const revalidate = 60;

@@ -16,7 +16,7 @@ export function WhatsAppButton() {
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 rounded-full bg-[#25D366] px-4 py-3 text-white shadow-lg transition-all hover:bg-[#20ba59] hover:shadow-xl hover:scale-105 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2"
-        aria-label="Chat with Orvane on WhatsApp"
+        aria-label={`Chat with ${SITE_CONFIG.name} on WhatsApp`}
       >
         <MessageCircle className="h-5 w-5 fill-white" />
         <span className="hidden sm:inline-block text-xs font-semibold tracking-wide">

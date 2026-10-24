@@ -4,11 +4,12 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getFaqs } from "@/lib/data/content";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "Frequently Asked Questions",
+  title: `Frequently Asked Questions | ${SITE_CONFIG.name}`,
   description:
-    "Common questions about working with Orvane: pricing, delivery, student engineering team, and project workflow.",
+    `Common questions about working with ${SITE_CONFIG.name}: pricing, delivery, student engineering team, and project workflow.`,
 };
 
 export const revalidate = 60;

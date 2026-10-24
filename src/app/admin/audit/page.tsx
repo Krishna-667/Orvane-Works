@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getAuditLogs } from "@/lib/data/admin";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { AuditClient } from "./audit-client";
 
 export const metadata = {
-  title: "Audit Log Explorer — Orvane Admin",
+  title: `Audit Log Explorer — ${SITE_CONFIG.name} Admin`,
   description:
     "Chronological, tamper-evident log of all studio administrative operations.",
 };

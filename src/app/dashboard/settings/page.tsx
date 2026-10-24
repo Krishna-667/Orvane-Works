@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { requireClient } from "@/lib/auth/guards";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { SettingsClient } from "./settings-client";
 
 export const metadata = {
-  title: "Account Settings & DPDP Privacy — Orvane Client Portal",
+  title: `Account Settings & DPDP Privacy — ${SITE_CONFIG.name} Client Portal`,
   description:
     "Manage client contact information, notification preferences, data export, and DPDP Act rights.",
 };

@@ -3,10 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, FileSpreadsheet } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getServices, getTestimonials, getFaqs } from "@/lib/data/content";
+import { SITE_CONFIG } from "@/lib/constants/site";
 import { ContentClient } from "./content-client";
 
 export const metadata = {
-  title: "Content CMS & Settings — Orvane Admin",
+  title: `Content CMS & Settings — ${SITE_CONFIG.name} Admin`,
   description:
     "Moderate client reviews, manage dynamic services catalog, and configure studio contact coordinates.",
 };

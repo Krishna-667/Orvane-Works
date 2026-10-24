@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { signUpClientAction } from "@/app/actions/auth";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export default function SignupPage() {
   const router = useRouter();
@@ -187,7 +188,7 @@ export default function SignupPage() {
             </Link>
           </div>
           <div>
-            Student applying to work with Orvane?{" "}
+            Student applying to work with {SITE_CONFIG.name}?{" "}
             <Link
               href="/join"
               className="text-foreground hover:text-primary font-medium hover:underline"

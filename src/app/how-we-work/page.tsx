@@ -3,11 +3,12 @@ import { ArrowRight, CheckCircle2, Clock, ShieldAlert, Sparkles, MessageSquare }
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { SITE_CONFIG } from "@/lib/constants/site";
 
 export const metadata = {
-  title: "How We Work",
+  title: `How We Work | ${SITE_CONFIG.name}`,
   description:
-    "Our transparent 4-step workflow, communication standards, and deliverable commitments at Orvane Studio.",
+    `Our transparent 4-step workflow, communication standards, and deliverable commitments at ${SITE_CONFIG.name}.`,
 };
 
 export default function HowWeWorkPage() {
@@ -67,7 +68,7 @@ export default function HowWeWorkPage() {
         </h1>
         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed">
           No corporate layers, no vague timelines, and no unexpected invoices.
-          Here is exactly what you can expect when you partner with Orvane.
+          Here is exactly what you can expect when you partner with {SITE_CONFIG.name}.
         </p>
       </div>
 
